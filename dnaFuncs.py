@@ -126,3 +126,8 @@ def translation(sequence):
     'gga': 'G',
     'ggg': 'G'
     }
+    #1 find start codon index
+    #2 fins stop condon indexes
+    #3 for each combination: if length is divisble by 3 (%3 == 0) then
+    #  translate, if not then skip that combination
+    #report what stop codon was used in output
