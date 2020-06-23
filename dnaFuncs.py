@@ -29,3 +29,100 @@ def reverseComp(sequence):
     reverse = ''.join(reverse) #changes the list to a string
 
     return(reverse)
+
+
+def transcription(sequence):
+    """
+    This funcion allows for the transcription of dna to rna for the input
+    sequence. Returns a string that is the rna transcript.
+    """
+    transcript = [] #creates empty list to append the bases to
+
+    for base in sequence: #iterates over sequnece
+        if base == 't': #replaces t with u in transcript
+            transcript.append('u')
+        else: #all other bases remain the same
+            transcript.append(base)
+
+    transcript = ''.join(transcript)
+
+    return(transcript)
+
+
+def translation(sequence):
+    """
+    This function will allow for the DNA sequence to be translated into the
+    corresponding protein sequence. It finds the first start codon (ATG) in the
+    sequence and all of the stop codons (TAA, TAG, TGA). For each combination
+    of start and stop, the code will check if the length is divisible by 3. If
+    it is then the translation will be done. If not that combination is ignored.
+    The translated protein is in the 1-letter code.
+    """
+    #sets dictionary for the codons and the corresponding amino acid. stop
+    #codons are correspond to ''
+    codons = {
+    'ttt': 'F',
+    'ttc': 'F',
+    'tta': 'L',
+    'ttg': 'L',
+    'ctt': 'L',
+    'ctc': 'L',
+    'cta': 'L',
+    'ctg': 'L',
+    'att': 'I',
+    'atc': 'I',
+    'ata': 'I',
+    'atg': 'M',
+    'gtt': 'V',
+    'gtc': 'V',
+    'gta': 'V',
+    'gtg': 'V',
+    'tct': 'S',
+    'tcc': 'S',
+    'tca': 'S',
+    'tcg': 'S',
+    'cct': 'P',
+    'ccc': 'P',
+    'cca': 'P',
+    'ccg': 'P',
+    'act': 'T',
+    'acc': 'T',
+    'aca': 'T',
+    'acg': 'T',
+    'gct': 'A',
+    'gcc': 'A',
+    'gca': 'A',
+    'gcg': 'A',
+    'tat': 'Y',
+    'tac': 'Y',
+    'taa': '',
+    'tag': '',
+    'cat': 'H',
+    'cac': 'H',
+    'caa': 'Q',
+    'cag': 'Q',
+    'aat': 'N',
+    'aac': 'N',
+    'aaa': 'K',
+    'aag': 'K',
+    'gat': 'D',
+    'gac': 'D',
+    'gaa': 'E',
+    'gag': 'E',
+    'tgt': 'C',
+    'tgc': 'C',
+    'tga': '',
+    'tgg': 'W',
+    'cgt': 'R',
+    'cgc': 'R',
+    'cga': 'R',
+    'cgg': 'R',
+    'agt': 'S',
+    'agc': 'S',
+    'aga': 'R',
+    'agg': 'R',
+    'ggt': 'G',
+    'ggc': 'G',
+    'gga': 'G',
+    'ggg': 'G'
+    }
