@@ -126,8 +126,35 @@ def translation(sequence):
     'gga': 'G',
     'ggg': 'G'
     }
-    #1 find start codon index
-    #2 fins stop condon indexes
+
+    #find the start site
+    startSite = sequence.find('atg') #this returns the index of the 'a'
+
+    #taa stop codon processing
+    taaStopSite = sequence[startSite:].find('taa') + 2
+    #finds the first taa after the stop site. the find returns the index of the
+    #'t' so add 2 to get the index of second 'a'
+
+    if ((taaStopSite - startSite) + 1) % 3 == 0:
+        #checks if the seq is a multiple of 3
+
+        protein = [] #creates empty list to add amino acids to
+
+        codonList = [sequence[i:i+3] for i in range(startSite, taaStopSite, 3)]
+        #determines the codons in between the start and taa stop site. does
+        #this through list comprehensions, loops over all indexes in the range
+        #of the start and stop codons and reads them sets of three
+
+        for codon in codonList: #loop over all codons in the codonList
+            protein.append(codons[codon]) #appends the amino acid from the dict
+        protein = ''.join(protein) #changes the list of amino acids to a string
+        print(protein)
+    #tag stop codon processing
+
+    #tga stop codon processing
+
     #3 for each combination: if length is divisble by 3 (%3 == 0) then
     #  translate, if not then skip that combination
     #report what stop codon was used in output
+
+translation('ataatgcgtagcgagtaagatcgatc')
