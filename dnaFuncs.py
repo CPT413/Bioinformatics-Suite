@@ -53,10 +53,11 @@ def translation(sequence):
     """
     This function will allow for the DNA sequence to be translated into the
     corresponding protein sequence. It finds the first start codon (ATG) in the
-    sequence and all of the stop codons (TAA, TAG, TGA). For each combination
-    of start and stop, the code will check if the length is divisible by 3. If
-    it is then the translation will be done. If not that combination is ignored.
-    The translated protein is in the 1-letter code.
+    sequence and all of the stop codons (TAA, TAG, TGA). The protein will be
+    translated using the start and first stop codon, the code will check if the
+    length is divisible by 3. If it is then the translation will be done.
+    If not that combination is ignored. The translated protein is in the
+    1-letter code.
     """
     #sets dictionary for the codons and the corresponding amino acid. stop
     #codons are correspond to ''
@@ -127,34 +128,42 @@ def translation(sequence):
     'ggg': 'G'
     }
 
-    #find the start site
+    #-----------------------------find the start site--------------------------
     startSite = sequence.find('atg') #this returns the index of the 'a'
 
-    #taa stop codon processing
-    taaStopSite = sequence[startSite:].find('taa') + 2
-    #finds the first taa after the stop site. the find returns the index of the
-    #'t' so add 2 to get the index of second 'a'
+    #actually dont need to find each different stop codon, just which stop
+    #has the lowest index, this will determine the protein. But must consider
+    #if this is not divisible by 3, then must go to the next stop codon
+    #-----------------------taa stop codon processing--------------------------
+    if sequence[startSite:].find('taa') != -1:
+        #find returns -1 if the desired substring is not in the string
+        #so this if will run only if at least 1 taa is in the string after
+        #the start codon
+        taaStopSite = sequence[startSite:].find('taa') + 2
+        #finds the first taa after the stop site. the find returns the index of
+        #the 't' so add 2 to get the index of second 'a'
 
-    if ((taaStopSite - startSite) + 1) % 3 == 0:
-        #checks if the seq is a multiple of 3
+        if ((taaStopSite - startSite) + 1) % 3 == 0:
+            #checks if the seq is a multiple of 3
 
-        protein = [] #creates empty list to add amino acids to
+            protein = [] #creates empty list to add amino acids to
 
-        codonList = [sequence[i:i+3] for i in range(startSite, taaStopSite, 3)]
-        #determines the codons in between the start and taa stop site. does
-        #this through list comprehensions, loops over all indexes in the range
-        #of the start and stop codons and reads them sets of three
+            codonList = [sequence[i:i+3] for i in range(startSite, taaStopSite, 3)]
+            #determines the codons in between the start and taa stop site. does
+            #this through list comprehensions, loops over all indexes in the
+            #range of the start and stop codons and reads them sets of three
 
-        for codon in codonList: #loop over all codons in the codonList
-            protein.append(codons[codon]) #appends the amino acid from the dict
-        protein = ''.join(protein) #changes the list of amino acids to a string
-        print(protein)
-    #tag stop codon processing
+            for codon in codonList: #loop over all codons in the codonList
+                protein.append(codons[codon]) #appends from the dict
+            protein = ''.join(protein) #changes the list to a string
+            print(protein)
 
-    #tga stop codon processing
+    #------------------------tag stop codon processing-------------------------
+
+    #------------------------tga stop codon processing-------------------------
 
     #3 for each combination: if length is divisble by 3 (%3 == 0) then
     #  translate, if not then skip that combination
     #report what stop codon was used in output
 
-translation('ataatgcgtagcgagtaagatcgatc')
+translation('ataatgcgtagcgagtaacgtagctaagctagatc')
