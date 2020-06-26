@@ -128,42 +128,27 @@ def translation(sequence):
     'ggg': 'G'
     }
 
-    #-----------------------------find the start site--------------------------
+    #finds start site in dna sequence
     startSite = sequence.find('atg') #this returns the index of the 'a'
 
-    #actually dont need to find each different stop codon, just which stop
-    #has the lowest index, this will determine the protein. But must consider
-    #if this is not divisible by 3, then must go to the next stop codon
-    #-----------------------taa stop codon processing--------------------------
-    if sequence[startSite:].find('taa') != -1:
-        #find returns -1 if the desired substring is not in the string
-        #so this if will run only if at least 1 taa is in the string after
-        #the start codon
-        taaStopSite = sequence[startSite:].find('taa') + 2
-        #finds the first taa after the stop site. the find returns the index of
-        #the 't' so add 2 to get the index of second 'a'
+    protein = [] #creates empyt list for protein sequence
 
-        if ((taaStopSite - startSite) + 1) % 3 == 0:
-            #checks if the seq is a multiple of 3
+    #creates a new list that reads the entered sequence in sets of 3 starting
+    #with the start codon. This produces a list of codons in frame with the
+    #start codon.
+    codonList = [sequence[i:i+3] for i in range(startSite, len(sequence), 3)]
 
-            protein = [] #creates empty list to add amino acids to
-
-            codonList = [sequence[i:i+3] for i in range(startSite, taaStopSite, 3)]
-            #determines the codons in between the start and taa stop site. does
-            #this through list comprehensions, loops over all indexes in the
-            #range of the start and stop codons and reads them sets of three
-
-            for codon in codonList: #loop over all codons in the codonList
-                protein.append(codons[codon]) #appends from the dict
-            protein = ''.join(protein) #changes the list to a string
-            print(protein)
-
-    #------------------------tag stop codon processing-------------------------
-
-    #------------------------tga stop codon processing-------------------------
-
-    #3 for each combination: if length is divisble by 3 (%3 == 0) then
-    #  translate, if not then skip that combination
-    #report what stop codon was used in output
-
-translation('ataatgcgtagcgagtaacgtagctaagctagatc')
+    #loops over that codon list and performs an action for each codon
+    #skips the start codon in translation because that methionine is not
+    #translated
+    for codon in codonList[1:]:
+        #checks to see if the current codon is one of the 3 stop codons
+        #if it is then it breaks out of the loop and translation stops
+        if (codon == 'taa') or (codon == 'tag') or (codon == 'tga'):
+            break
+        #if the codon is not a stop, then the corresponding amino acid is added
+        #to the protein list
+        else:
+            protein.append(codons[codon])
+    protein = ''.join(protein) #final protein list is changed into a string
+    return(protein)
