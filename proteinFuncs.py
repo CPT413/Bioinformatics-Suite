@@ -2,8 +2,9 @@ def molecularWeight(sequence):
     """
     This function will take a sequence of amino acids (single letter
     abbrevation and upper case) and will return the molecular weight of the
-    protein.
+    protein (g/mol).
     """
+    #dictionary or residues and their corresponding molecular weight in g/mol
     residueMasses = {
     'G': 57.02,
     'A': 71.04,
@@ -26,6 +27,11 @@ def molecularWeight(sequence):
     'Y': 163.06,
     'W': 186.08
     }
-    
 
-molecularWeight('AMNAKFB')
+    mass = 0 #initiate mass to 0
+
+    #loops over all residues in the sequence
+    for residue in sequence:
+        mass += residueMasses[residue] #adds the mass of the residue
+
+    return(mass) #returns final mass
