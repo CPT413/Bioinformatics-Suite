@@ -41,3 +41,47 @@ def oneToThree(sequence):
     Converts a sequence of amino acids in single-letter abbreviation to the
     corresponding three-letter abbreviation
     """
+
+    #dictionary of the one-letter abbreviations and the corresponding
+    #three-letter abbreviations
+    oneLetter = {
+    'A': 'Ala',
+    'R': 'Arg',
+    'N': 'Asn',
+    'D': 'Asp',
+    'C': 'Cys',
+    'E': 'Glu',
+    'Q': 'Gln',
+    'G': 'Gly',
+    'H': 'His',
+    'I': 'Ile',
+    'L': 'Leu',
+    'K': 'Lys',
+    'M': 'Met',
+    'F': 'Phe',
+    'P': 'Pro',
+    'S': 'Ser',
+    'T': 'Thr',
+    'W': 'Trp',
+    'Y': 'Tyr',
+    'V': 'Val'
+    }
+
+    threeLetter = [] #creates a list to append the three-letter abbreviations
+    index = 0 #create an index variable to keep track where in the sequence
+
+    #loop over all of the sequence
+    for residue in sequence:
+        #if the loop is at the end of the sequence, append the abbreviation
+        #withouth '-'
+        if index == (len(sequence) - 1):
+            threeLetter.append(oneLetter[residue])
+        #otherwise append the abbreviation plus '-'
+        else:
+            threeLetter.append(oneLetter[residue] + '-')
+
+        index += 1 #iterate the index variable to keep track of position
+
+    threeLetter = ''.join(threeLetter)#join the list into a string
+
+    return(threeLetter)
