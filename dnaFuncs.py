@@ -139,9 +139,7 @@ def translation(sequence):
     codonList = [sequence[i:i+3] for i in range(startSite, len(sequence), 3)]
 
     #loops over that codon list and performs an action for each codon
-    #skips the start codon in translation because that methionine is not
-    #translated
-    for codon in codonList[1:]:
+    for codon in codonList:
         #checks to see if the current codon is one of the 3 stop codons
         #if it is then it breaks out of the loop and translation stops
         if (codon == 'taa') or (codon == 'tag') or (codon == 'tga'):
