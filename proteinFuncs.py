@@ -91,3 +91,37 @@ def threeToOne(sequence):
     Converts a sequence of amino acids in three-letter abbreviation to the
     corresponding single-letter abbreviation
     """
+    #dictionary of the three-letter abbreviations and the corresponding
+    #one-letter abbreviations
+    threeLetter = {
+    'Cys': 'C',
+    'Asp': 'D',
+    'Ser': 'S',
+    'Gln': 'Q',
+    'Lys': 'K',
+    'Trp': 'W',
+    'Asn': 'N',
+    'Pro': 'P',
+    'Thr': 'T',
+    'Phe': 'F',
+    'Ala': 'A',
+    'Gly': 'G',
+    'Ile': 'I',
+    'Leu': 'L',
+    'His': 'H',
+    'Arg': 'R',
+    'Met': 'M',
+    'Val': 'V',
+    'Glu': 'E',
+    'Tyr': 'Y'}
+
+    oneLetter = [] #created new list to append the one-letter abbreviation
+
+    #loop over every residue in sequence, splits string at the '-'
+    for residue in sequence.split('-'):
+    #appends the corresponding one-letter abbreviation
+        oneLetter.append(threeLetter[residue])
+
+    oneLetter = ''.join(oneLetter) #converts list to a string
+
+    return(oneLetter)
