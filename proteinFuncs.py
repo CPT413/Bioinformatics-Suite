@@ -35,3 +35,9 @@ def molecularWeight(sequence):
         mass += residueMasses[residue] #adds the mass of the residue
 
     return(mass) #returns final mass
+
+def oneToThree(sequence):
+    """
+    Converts a sequence of amino acids in single-letter abbreviation to the
+    corresponding three-letter abbreviation
+    """
