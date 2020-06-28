@@ -85,3 +85,9 @@ def oneToThree(sequence):
     threeLetter = ''.join(threeLetter)#join the list into a string
 
     return(threeLetter)
+
+def threeToOne(sequence):
+    """
+    Converts a sequence of amino acids in three-letter abbreviation to the
+    corresponding single-letter abbreviation
+    """
