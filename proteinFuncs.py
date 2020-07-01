@@ -133,3 +133,52 @@ def isoelectricPoint(sequence):
     sequence. The calculation will be made assuming body temperature (37C) and
     standard conditions.
     """
+
+def netCharge(sequence, pH):
+    """
+    This function will be used to determine the net charge of a protein at a
+    specified pH value.
+    """
+    #dictionary of the pKas for each amino acid. Each key corresponds to a list
+    #with the pKa value [carboxyl, amino, side-chain]
+    pKaDict = {
+    'G': [2.34,9.60, None],
+    'A': [2.34, 9.69, None],
+    'V': [2.32,9.62, None],
+    'L': [2.36, 9.60, None],
+    'I': [2.36, 9.60, None],
+    'S': [2.21, 9.15, None],
+    'T': [2.63, 10.43, None],
+    'M': [2.28, 9.21, None],
+    'F': [1.83, 9.13, None],
+    'W': [2.83, 9.39, None],
+    'N': [2.02, 8.80, None],
+    'Q': [2.17, 9.13, None],
+    'P': [1.99, 10.60, None],
+    'C': [1.71, 10.78, 8.33],
+    'H': [1.82, 9.17, 6.00],
+    'D': [2.09, 9.82, 3.86],
+    'E': [2.19, 9.67, 4.25],
+    'Y': [2.20, 9.11, 10.07],
+    'K': [2.18, 8.95, 10.79],
+    'R': [2.17, 9.04, 12.48]
+    }
+
+    index = 0
+    charge = 0
+    for residue in sequence:
+        if index == 0: #first amino acid
+            if pH < sequence[residue][1]:
+                charge += 1
+        elif index == (len(sequence) - 1): #last amino acid
+            if pH >= sequence[residue][0]:
+                charge += -1
+
+        else: #rest of the amino acids
+            if sequence[residue][2] != None:
+                
+
+        index += 1
+
+    print(len(pKaDict))
+netCharge('asd', 4)
