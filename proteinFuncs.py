@@ -130,5 +130,6 @@ def threeToOne(sequence):
 def isoelectricPoint(sequence):
     """
     This function will determine the isoelectric point of the given amino acids
-    sequence.
+    sequence. The calculation will be made assuming body temperature (37C) and
+    standard conditions.
     """
