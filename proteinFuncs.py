@@ -168,17 +168,25 @@ def netCharge(sequence, pH):
     charge = 0
     for residue in sequence:
         if index == 0: #first amino acid
-            if pH < sequence[residue][1]:
+            if pH < pKaDict[residue][1]:
                 charge += 1
         elif index == (len(sequence) - 1): #last amino acid
-            if pH >= sequence[residue][0]:
+            if pH >= pKaDict[residue][0]:
                 charge += -1
 
         else: #rest of the amino acids
-            if sequence[residue][2] != None:
-                
+            if pKaDict[residue][2] != None:
+                if (residue == 'C') or (residue == 'Y'):
+                    if pH >= pKaDict[residue][2]:
+                        charge += -1
+                elif (residue == 'D') or (residue == 'E'):
+                    if pH >= pKaDict[residue][2]:
+                        charge += -1
+                elif (residue == 'K') or (residue == 'R') or (residue == 'H'):
+                    if pH <= pKaDict[residue][2]:
+                        charge += 1
 
         index += 1
 
-    print(len(pKaDict))
-netCharge('asd', 4)
+    print(len(pKaDict), charge)
+netCharge('RDGHTYHGREQNA', )
