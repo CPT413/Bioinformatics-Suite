@@ -125,3 +125,10 @@ def threeToOne(sequence):
     oneLetter = ''.join(oneLetter) #converts list to a string
 
     return(oneLetter)
+
+
+def isoelectricPoint(sequence):
+    """
+    This function will determine the isoelectric point of the given amino acids
+    sequence.
+    """
