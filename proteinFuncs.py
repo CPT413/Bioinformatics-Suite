@@ -164,23 +164,37 @@ def netCharge(sequence, pH):
     'R': [2.17, 9.04, 12.48]
     }
 
-    index = 0
-    charge = 0
-    for residue in sequence:
-        if index == 0: #first amino acid
-            if pH < pKaDict[residue][1]:
+    index = 0 #create variable to keep track of location in sequence
+    charge = 0 #create vaiable to keep track of charge
+    for residue in sequence: #loop over all residues of the protein
+#---------------------------first amino acid-----------------------------------
+        if index == 0:
+        #checks to see if the pH is less than the pKa associated with the
+        #N-terminus
+            if pH <= pKaDict[residue][1]:
+                #if it is, add 1 to the charge
                 charge += 1
+                #logic for side chain pKa
+                #check to see if the residue does have a sidechain with pKa
                 if pKaDict[residue][2] != None:
+                    #if the residue is a C or Y
                     if (residue == 'C') or (residue == 'Y'):
+                        #if pH greater than the pKa of residue, subtract 1
                         if pH >= pKaDict[residue][2]:
                             charge += -1
+                    #if the residue is a D or E
                     elif (residue == 'D') or (residue == 'E'):
+                        #if pH greater than pKa, subtract 1
                         if pH >= pKaDict[residue][2]:
                             charge += -1
+                    #if residue is a K, R, or H
                     elif (residue == 'K') or (residue == 'R') or (residue == 'H'):
+                        #if pH less than pKa, add 1
                         if pH <= pKaDict[residue][2]:
                             charge += 1
+            #if the pH > pKa
             else:
+                #run through side chain logic, see above
                 if pKaDict[residue][2] != None:
                     if (residue == 'C') or (residue == 'Y'):
                         if pH >= pKaDict[residue][2]:
@@ -191,9 +205,14 @@ def netCharge(sequence, pH):
                     elif (residue == 'K') or (residue == 'R') or (residue == 'H'):
                         if pH <= pKaDict[residue][2]:
                             charge += 1
-        elif index == (len(sequence) - 1): #last amino acid
+#----------------------------last amino acid-----------------------------------
+        elif index == (len(sequence) - 1):
+            #checks to see if pH is greater than pKa associated with the C-
+            #terminus
             if pH >= pKaDict[residue][0]:
+                #subtract 1 if it is
                 charge += -1
+                #run through sidechain logic, see above
                 if pKaDict[residue][2] != None:
                     if (residue == 'C') or (residue == 'Y'):
                         if pH >= pKaDict[residue][2]:
@@ -204,7 +223,9 @@ def netCharge(sequence, pH):
                     elif (residue == 'K') or (residue == 'R') or (residue == 'H'):
                         if pH <= pKaDict[residue][2]:
                             charge += 1
+            #if pH < pKa
             else:
+                #run through sidechain logic, see above
                 if pKaDict[residue][2] != None:
                     if (residue == 'C') or (residue == 'Y'):
                         if pH >= pKaDict[residue][2]:
@@ -215,8 +236,9 @@ def netCharge(sequence, pH):
                     elif (residue == 'K') or (residue == 'R') or (residue == 'H'):
                         if pH <= pKaDict[residue][2]:
                             charge += 1
-
-        else: #rest of the amino acids
+#------------------------------all other amino acids---------------------------
+        else:
+            #run through sidechain logic, see above
             if pKaDict[residue][2] != None:
                 if (residue == 'C') or (residue == 'Y'):
                     if pH >= pKaDict[residue][2]:
@@ -228,7 +250,6 @@ def netCharge(sequence, pH):
                     if pH <= pKaDict[residue][2]:
                         charge += 1
 
-        index += 1
+        index += 1 #increment the index for the next residue
 
-    print(charge)
-netCharge('RDG', 1)
+    return(charge)
