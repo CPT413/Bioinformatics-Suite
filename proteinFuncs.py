@@ -134,6 +134,11 @@ def isoelectricPoint(sequence):
     standard conditions.
     """
 
+    for pH in range(1,13):
+        if netCharge(sequence, pH) == 0:
+            neutralpH = pH
+            break
+    print(neutralpH)
 def netCharge(sequence, pH):
     """
     This function will be used to determine the net charge of a protein at a
@@ -253,3 +258,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
+isoelectricPoint('DRGHTYWEDGQAS')
