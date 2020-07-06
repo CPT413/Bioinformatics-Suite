@@ -1,3 +1,10 @@
+def proteinSeqCheck(sequence):
+    """
+    This function will check to make sure that only applicable characters are
+    in the sequence. Will also convert the string to upper-case, which is
+    standard for working with amino acids.
+    """
+
 def molecularWeight(sequence):
     """
     This function will take a sequence of amino acids (single letter
