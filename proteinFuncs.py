@@ -133,7 +133,8 @@ def isoelectricPoint(sequence):
     sequence. The calculation will be made assuming body temperature (37C) and
     standard conditions.
     """
-
+    #dictionary of the pKas for each amino acid. Each key corresponds to a list
+    #with the pKa value [carboxyl, amino, side-chain]
     pKaDict = {
     'G': [2.34,9.60, None],
     'A': [2.34, 9.69, None],
@@ -157,28 +158,47 @@ def isoelectricPoint(sequence):
     'R': [2.17, 9.04, 12.48]
     }
 
-    pKaList = []
-    index = 0
+    pKaList = [] #list to append all pKa values to in sequence
+    index = 0 #index variable to keep track of location in list
+
+    #loop over all residues and add applicable pKas
     for residue in sequence:
 #---------------------------first residue--------------------------------------
         if index == 0:
-            pKaList.append(pKaDict[residue][1])
+            pKaList.append(pKaDict[residue][1]) #append pKa of N-terminus
             if pKaDict[residue][2] != None:
+                #if the residue has a pKa for side chain, append value
                 pKaList.append(pKaDict[residue][2])
 #--------------------------last residue----------------------------------------
         elif index == (len(sequence) - 1):
-            pKaList.append(pKaDict[residue][0])
+            pKaList.append(pKaDict[residue][0]) #append pKa of C-terminus
             if pKaDict[residue][2] != None:
+                #if the residue has a pKa for side chain, append value
                 pKaList.append(pKaDict[residue][2])
 #--------------------------all other residues----------------------------------
         else:
+            #if the residue has a pKa for side chain, append value
             if pKaDict[residue][2] != None:
                 pKaList.append(pKaDict[residue][2])
-    for pH in range(1,13):
-        if netCharge(sequence, pH) == 0:
-            pKaList.append(pH)
+#------------------------------------------------------------------------------
+        index += 1 #increment index to keep track of spot
 
-    print(neutralpH)
+    #loop to find the pH at which the sequence has no net charge
+    for pH in range(1,13):
+        #if the sequence is neutral at a given pH
+        if netCharge(sequence, pH) == 0:
+            #append that value to the pKa list
+            pKaList.append(pH)
+            neutralpH = pH #make the pH variable available to the rest of code
+
+    pKaList = sorted(pKaList) #sort list in ascending order
+
+    #finds average of pKas on either side of neutral pH, this is the agreed on
+    #easy way to determine isoelectic point
+    isoPoint = (pKaList[pKaList.index(neutralpH) - 1] + pKaList[pKaList.index(neutralpH) + 1]) / 2
+
+
+    return(isoPoint)
 
 
 def netCharge(sequence, pH):
@@ -300,4 +320,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-isoelectricPoint('DRGHTYWEDGQAS')
+isoelectricPoint('WGRGFDQNTYVILPNRYT')
