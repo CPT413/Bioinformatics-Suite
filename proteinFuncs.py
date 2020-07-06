@@ -8,11 +8,22 @@ def proteinSeqCheck(sequence):
     singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L', 'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W']
     threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn', 'Pro', 'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met', 'Val', 'Glu', 'Tyr']
 
+#----------------------------determine what style the sequence is--------------
+    style = 0
+
+    if sequence.split('-')[0] in threeLetterList:
+        style = 3
+    else:
+        style = 1
+
 #------------------single letter abbreviation check----------------------------
-    for residue in sequence:
-        if residue not in singleLetterList:
-            raise ValueError ('A character in your sequence is not a single letter abbreviation')
-    print(sequence)
+    if style == 1:
+        for residue in sequence:
+            if residue not in singleLetterList:
+                raise ValueError ('A character in your sequence is not a single letter abbreviation')
+        print(sequence)
+
+
 def molecularWeight(sequence):
     """
     This function will take a sequence of amino acids (single letter
@@ -335,4 +346,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-proteinSeqCheck('AS@')
+proteinSeqCheck('Asn-Gly')
