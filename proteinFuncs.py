@@ -4,8 +4,15 @@ def proteinSeqCheck(sequence):
     in the sequence. Will also convert the string to upper-case, which is
     standard for working with amino acids.
     """
-    for
 
+    singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L', 'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W']
+    threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn', 'Pro', 'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met', 'Val', 'Glu', 'Tyr']
+
+#------------------single letter abbreviation check----------------------------
+    for residue in sequence:
+        if residue not in singleLetterList:
+            raise ValueError ('A character in your sequence is not a single letter abbreviation')
+    print(sequence)
 def molecularWeight(sequence):
     """
     This function will take a sequence of amino acids (single letter
@@ -328,4 +335,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-isoelectricPoint('WGRGFDQNTYVILPNRYT')
+proteinSeqCheck('AS@')
