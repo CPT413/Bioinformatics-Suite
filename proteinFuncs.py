@@ -4,6 +4,7 @@ def proteinSeqCheck(sequence):
     in the sequence. Will also convert the string to upper-case, which is
     standard for working with amino acids.
     """
+    for
 
 def molecularWeight(sequence):
     """
