@@ -21,8 +21,15 @@ def proteinSeqCheck(sequence):
         for residue in sequence:
             if residue not in singleLetterList:
                 raise ValueError ('A character in your sequence is not a single letter abbreviation')
-        print(sequence)
+        return(sequence)
 
+#-----------------three letter abbreviation check------------------------------
+    if style == 3:
+        sequenceThree = sequence.split('-')
+        for residue in sequenceThree:
+            if residue not in threeLetterList:
+                raise  ValueError ('A residue in your sequence is not a three letter abbreviation')
+        return(sequence)
 
 def molecularWeight(sequence):
     """
