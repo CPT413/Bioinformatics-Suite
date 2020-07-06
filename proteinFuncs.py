@@ -4,32 +4,40 @@ def proteinSeqCheck(sequence):
     in the sequence. Will also convert the string to upper-case, which is
     standard for working with amino acids.
     """
-
+    #lists to comapre the residues to when checking
     singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L', 'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W']
     threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn', 'Pro', 'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met', 'Val', 'Glu', 'Tyr']
 
 #----------------------------determine what style the sequence is--------------
     style = 0
 
+    #if the sequnce splits at '-' marks and matches a residue in the three
+    #letter list, the sequence is in three letter abbreviation
     if sequence.split('-')[0] in threeLetterList:
-        style = 3
+        style = 3 #set style value to 3, means three letter
     else:
-        style = 1
+        style = 1 #otherwise the style value is set to 1, means one letter
 
 #------------------single letter abbreviation check----------------------------
-    if style == 1:
+    if style == 1: #checks to see the style, if 1 then check one letter
+        #loopes over whole sequence and checks each residue
         for residue in sequence:
+            #if the residue is not in the list above
             if residue not in singleLetterList:
+                #throws error and terminates code
                 raise ValueError ('A character in your sequence is not a single letter abbreviation')
-        return(sequence)
+        return(sequence) #if no errors occur, returns the sequence
 
 #-----------------three letter abbreviation check------------------------------
-    if style == 3:
-        sequenceThree = sequence.split('-')
+    elif style == 3: #checks to see the style, if 3 then three letter
+        sequenceThree = sequence.split('-') #splits sequence into residues
+        #loops over all residues in sequencce
         for residue in sequenceThree:
+            #if the residue is not in the list above
             if residue not in threeLetterList:
+                #throws error and terminates code
                 raise  ValueError ('A residue in your sequence is not a three letter abbreviation')
-        return(sequence)
+        return(sequence) #if no errors, returns the sequence
 
 def molecularWeight(sequence):
     """
