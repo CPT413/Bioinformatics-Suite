@@ -134,11 +134,53 @@ def isoelectricPoint(sequence):
     standard conditions.
     """
 
+    pKaDict = {
+    'G': [2.34,9.60, None],
+    'A': [2.34, 9.69, None],
+    'V': [2.32,9.62, None],
+    'L': [2.36, 9.60, None],
+    'I': [2.36, 9.60, None],
+    'S': [2.21, 9.15, None],
+    'T': [2.63, 10.43, None],
+    'M': [2.28, 9.21, None],
+    'F': [1.83, 9.13, None],
+    'W': [2.83, 9.39, None],
+    'N': [2.02, 8.80, None],
+    'Q': [2.17, 9.13, None],
+    'P': [1.99, 10.60, None],
+    'C': [1.71, 10.78, 8.33],
+    'H': [1.82, 9.17, 6.00],
+    'D': [2.09, 9.82, 3.86],
+    'E': [2.19, 9.67, 4.25],
+    'Y': [2.20, 9.11, 10.07],
+    'K': [2.18, 8.95, 10.79],
+    'R': [2.17, 9.04, 12.48]
+    }
+
+    pKaList = []
+    index = 0
+    for residue in sequence:
+#---------------------------first residue--------------------------------------
+        if index == 0:
+            pKaList.append(pKaDict[residue][1])
+            if pKaDict[residue][2] != None:
+                pKaList.append(pKaDict[residue][2])
+#--------------------------last residue----------------------------------------
+        elif index == (len(sequence) - 1):
+            pKaList.append(pKaDict[residue][0])
+            if pKaDict[residue][2] != None:
+                pKaList.append(pKaDict[residue][2])
+#--------------------------all other residues----------------------------------
+        else:
+            if pKaDict[residue][2] != None:
+                pKaList.append(pKaDict[residue][2])
     for pH in range(1,13):
         if netCharge(sequence, pH) == 0:
-            neutralpH = pH
-            break
+            pKaList.append(pH)
+
     print(neutralpH)
+
+
 def netCharge(sequence, pH):
     """
     This function will be used to determine the net charge of a protein at a
