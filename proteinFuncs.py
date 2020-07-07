@@ -36,7 +36,7 @@ def proteinSeqCheck(sequence):
     elif style == 3: #checks to see the style, if 3 then three letter
         sequence = sequence.title() #capitalizes first letter in each residue
         sequenceThree = sequence.split('-') #splits sequence into residues
-        #loops over all residues in sequencce
+        #loops over all residues in sequence
         for residue in sequenceThree:
             #if the residue is not in the list above
             if residue not in threeLetterList:
