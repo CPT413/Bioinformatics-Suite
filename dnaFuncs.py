@@ -1,3 +1,10 @@
+def dnaSeqCheck(sequence):
+    """
+    This function will be used to proofread the entered sequence before
+    processing. The function qill return a sequence in lower-case format
+    """
+    
+
 def gcContent(sequence):
     """
     This function will calculate the gc content for a given sequence.
