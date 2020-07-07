@@ -3,7 +3,16 @@ def dnaSeqCheck(sequence):
     This function will be used to proofread the entered sequence before
     processing. The function qill return a sequence in lower-case format
     """
-    
+
+    baseList = ['a', 't', 'g', 'c']
+
+    sequence = sequence.lower()
+
+    for base in sequence:
+        if base not in baseList:
+            raise ValueError('A base in your sequence is not a nucleotide')
+    print(sequence)
+
 
 def gcContent(sequence):
     """
@@ -157,3 +166,4 @@ def translation(sequence):
             protein.append(codons[codon])
     protein = ''.join(protein) #final protein list is changed into a string
     return(protein)
+dnaSeqCheck('AGTCGATCGATATCGCGATATGCGCTAGATCGATGCTAGATGTCGATGCTAGCATGTATCG')
