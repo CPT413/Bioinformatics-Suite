@@ -13,7 +13,7 @@ def proteinSeqCheck(sequence):
 
     #if the sequnce splits at '-' marks and matches a residue in the three
     #letter list, the sequence is in three letter abbreviation
-    if sequence.split('-')[0] in threeLetterList:
+    if sequence.title().split('-')[0] in threeLetterList:
         style = 3 #set style value to 3, means three letter
     else:
         style = 1 #otherwise the style value is set to 1, means one letter
@@ -31,6 +31,7 @@ def proteinSeqCheck(sequence):
 
 #-----------------three letter abbreviation check------------------------------
     elif style == 3: #checks to see the style, if 3 then three letter
+        sequence = sequence.title() #capitalizes first letter in each residue
         sequenceThree = sequence.split('-') #splits sequence into residues
         #loops over all residues in sequencce
         for residue in sequenceThree:
@@ -362,4 +363,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-proteinSeqCheck('AG')
+proteinSeqCheck('asn-his')
