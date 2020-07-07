@@ -30,7 +30,7 @@ def proteinSeqCheck(sequence):
             if residue not in singleLetterList:
                 #throws error and terminates code
                 raise ValueError ('A character in your sequence is not a single letter abbreviation')
-        return(sequence) #if no errors occur, returns the sequence
+        return(sequence, style) #if no errors occur, returns the sequence
 
 #-----------------three letter abbreviation check------------------------------
     elif style == 3: #checks to see the style, if 3 then three letter
@@ -42,7 +42,7 @@ def proteinSeqCheck(sequence):
             if residue not in threeLetterList:
                 #throws error and terminates code
                 raise  ValueError ('A residue in your sequence is not a three letter abbreviation')
-        return(sequence) #if no errors, returns the sequence
+        return(sequence, style) #if no errors, returns the sequence
 
 def molecularWeight(sequence):
     """
@@ -366,4 +366,3 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-proteinSeqCheck('asn-his')
