@@ -5,8 +5,11 @@ def proteinSeqCheck(sequence):
     standard for working with amino acids.
     """
     #lists to comapre the residues to when checking
-    singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L', 'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W']
-    threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn', 'Pro', 'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met', 'Val', 'Glu', 'Tyr']
+    singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L', 'N', 'D', \
+    'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W']
+    threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn', 'Pro', \
+    'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met', 'Val', \
+    'Glu', 'Tyr']
 
 #----------------------------determine what style the sequence is--------------
     style = 0
