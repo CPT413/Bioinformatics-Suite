@@ -4,3 +4,5 @@ from proteinFuncs import * #import all funcs from proteinFuncs
 from readFASTA import * #import all funcs from readFASTA
 
 window = tk.Tk()
+
+window.mainloop()
