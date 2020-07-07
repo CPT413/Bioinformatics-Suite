@@ -20,6 +20,7 @@ def proteinSeqCheck(sequence):
 
 #------------------single letter abbreviation check----------------------------
     if style == 1: #checks to see the style, if 1 then check one letter
+        sequence = sequence.upper() #converts sequence to upper-case
         #loopes over whole sequence and checks each residue
         for residue in sequence:
             #if the residue is not in the list above
@@ -361,4 +362,4 @@ def netCharge(sequence, pH):
         index += 1 #increment the index for the next residue
 
     return(charge)
-proteinSeqCheck('Asn-Gly')
+proteinSeqCheck('AG')
