@@ -4,14 +4,18 @@ def dnaSeqCheck(sequence):
     processing. The function qill return a sequence in lower-case format
     """
 
-    baseList = ['a', 't', 'g', 'c']
+    baseList = ['a', 't', 'g', 'c'] #list to compare each character to
 
-    sequence = sequence.lower()
+    sequence = sequence.lower() #converts sequence to lower-case
 
+    #loops over each character in the sequence
     for base in sequence:
+        #if the base is not in the list
         if base not in baseList:
+            #throws error and terminates code
             raise ValueError('A base in your sequence is not a nucleotide')
-    print(sequence)
+
+    return(sequence) #returns sequence is all characters are a, t, g, or c
 
 
 def gcContent(sequence):
@@ -166,4 +170,3 @@ def translation(sequence):
             protein.append(codons[codon])
     protein = ''.join(protein) #final protein list is changed into a string
     return(protein)
-dnaSeqCheck('AGTCGATCGATATCGCGATATGCGCTAGATCGATGCTAGATGTCGATGCTAGCATGTATCG')
