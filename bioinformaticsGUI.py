@@ -3,6 +3,6 @@ from dnaFuncs import * #import all functions from dnaFuncs
 from proteinFuncs import * #import all funcs from proteinFuncs
 from readFASTA import * #import all funcs from readFASTA
 
-window = tk.Tk()
+window = tk.Tk() #create tkinter winde
 
-window.mainloop()
+window.mainloop() #run window loop
