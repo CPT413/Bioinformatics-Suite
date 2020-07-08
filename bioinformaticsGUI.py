@@ -6,19 +6,17 @@ from readFASTA import * #import all funcs from readFASTA
 #function to get value of checkbuttons
 def buttonClick():
 
+    outputWindow.delete('1.0', 'end') #delete all entries in outputWindow
+    
     sequence = dnaSeqCheck(sequenceEntry.get()) #checks that seq is valid
     #for each button, checks if selected. if True, output is printed
     if gcVar.get() == 1:
-        print(gcContent(sequence))
         outputWindow.insert("1.0", "GC content: " + str(gcContent(sequence))+"\n")
     if revCompVar.get() == 1:
-        print(reverseComp(sequence))
         outputWindow.insert("2.0", "Reverse complement: " + reverseComp(sequence)+"\n")
     if transVar.get() == 1:
-        print(transcription(sequence))
         outputWindow.insert("3.0", "Transciption: " + transcription(sequence)+"\n")
     if translationVar.get() == 1:
-        print(translation(sequence))
         outputWindow.insert("4.0", "Translation: " + translation(sequence)+"\n")
 
 window = tk.Tk() #create tkinter winde
