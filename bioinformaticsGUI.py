@@ -6,18 +6,18 @@ from readFASTA import * #import all funcs from readFASTA
 #function to get value of checkbuttons
 def buttonClick():
 
-    outputWindow.delete('1.0', 'end') #delete all entries in outputWindow
-    
+    outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
+
     sequence = dnaSeqCheck(sequenceEntry.get()) #checks that seq is valid
     #for each button, checks if selected. if True, output is printed
     if gcVar.get() == 1:
-        outputWindow.insert("1.0", "GC content: " + str(gcContent(sequence))+"\n")
+        outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
     if revCompVar.get() == 1:
-        outputWindow.insert("2.0", "Reverse complement: " + reverseComp(sequence)+"\n")
+        outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
     if transVar.get() == 1:
-        outputWindow.insert("3.0", "Transciption: " + transcription(sequence)+"\n")
+        outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
     if translationVar.get() == 1:
-        outputWindow.insert("4.0", "Translation: " + translation(sequence)+"\n")
+        outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
 
 window = tk.Tk() #create tkinter winde
 window.title("Bioinformatics Suite") #changes title of window
