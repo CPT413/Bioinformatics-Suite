@@ -26,7 +26,7 @@ greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to th
 
 
 #create varaible to save the value of the checkbuttons
-sequenceEntry = tk.Text()
+sequenceEntry = tk.Text(height = 5, borderwidth = 2, relief = tk.GROOVE)
 gcVar = tk.IntVar()
 revCompVar = tk.IntVar()
 transVar = tk.IntVar()
@@ -41,7 +41,7 @@ translationSelect = tk.Checkbutton(text = 'Translation', variable = translationV
 #create button to analyse the seq, connected to buttonClick func
 analyzeButton = tk.Button(text = "Analyze", command = buttonClick)
 
-outputWindow = tk.Text()
+outputWindow = tk.Text(height = 10, borderwidth = 2, relief = tk.GROOVE)
 
 #pack all components into window
 greeting.pack()
