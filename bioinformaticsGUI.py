@@ -26,7 +26,10 @@ greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to th
 
 
 #create varaible to save the value of the checkbuttons
-sequenceEntry = tk.Text(height = 5, borderwidth = 2, relief = tk.GROOVE)
+entryScrollbar = tk.Scrollbar()
+entryScrollbar.pack(side = tk.RIGHT, fill = tk.Y)
+sequenceEntry = tk.Text(yscrollcommand = entryScrollbar.set,height = 5, borderwidth = 2, relief = tk.GROOVE)
+
 gcVar = tk.IntVar()
 revCompVar = tk.IntVar()
 transVar = tk.IntVar()
@@ -41,6 +44,8 @@ translationSelect = tk.Checkbutton(text = 'Translation', variable = translationV
 #create button to analyse the seq, connected to buttonClick func
 analyzeButton = tk.Button(text = "Analyze", command = buttonClick)
 
+outputText = tk.Label(text = "Analysis Output:") #add text to denote output
+
 outputWindow = tk.Text(height = 10, borderwidth = 2, relief = tk.GROOVE)
 
 #pack all components into window
@@ -51,6 +56,7 @@ reverseCompSelect.pack()
 transcriptionSelect.pack()
 translationSelect.pack()
 analyzeButton.pack()
+outputText.pack()
 outputWindow.pack()
 
 window.mainloop() #run window loop
