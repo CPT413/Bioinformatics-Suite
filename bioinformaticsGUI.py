@@ -8,7 +8,7 @@ def buttonClick():
 
     outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
 
-    sequence = dnaSeqCheck(sequenceEntry.get()) #checks that seq is valid
+    sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
     #for each button, checks if selected. if True, output is printed
     if gcVar.get() == 1:
         outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
@@ -26,7 +26,7 @@ greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to th
 
 
 #create varaible to save the value of the checkbuttons
-sequenceEntry = tk.Entry()
+sequenceEntry = tk.Text()
 gcVar = tk.IntVar()
 revCompVar = tk.IntVar()
 transVar = tk.IntVar()
