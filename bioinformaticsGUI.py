@@ -7,8 +7,11 @@ from readFASTA import * #import all funcs from readFASTA
 def buttonClick():
 
     outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
-
+    print(sequenceEntry.get('1.0', 'end-1c'))
+    print(readFASTA(sequenceEntry.get('1.0', 'end-1c')))
+    """
     sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
+
     #for each button, checks if selected. if True, output is printed
     if gcVar.get() == 1:
         outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
@@ -18,7 +21,7 @@ def buttonClick():
         outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
     if translationVar.get() == 1:
         outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
-
+    """
 window = tk.Tk() #create tkinter winde
 window.title("Bioinformatics Suite") #changes title of window
 greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to the window
