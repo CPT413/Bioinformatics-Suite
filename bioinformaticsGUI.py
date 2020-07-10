@@ -8,7 +8,7 @@ def buttonClick():
 
     outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
     print(sequenceEntry.get('1.0', 'end-1c'))
-    print(readFASTA(sequenceEntry.get('1.0', 'end-1c')))
+    print(readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines()))
     """
     sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
 
