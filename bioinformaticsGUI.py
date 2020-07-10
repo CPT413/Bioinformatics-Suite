@@ -143,57 +143,60 @@ def proteinGUI():
                     outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
 
 
-    dnaWindow = tk.Toplevel(master=menuWindow)
-    dnaWindow.title("DNA Suite") #changes title of window
+    proteinWindow = tk.Toplevel(master=menuWindow)
+    proteinWindow.title("Protein Suite") #changes title of window
 
      #creates and packs label for text entry box
-    entryText = tk.Label(dnaWindow,text = "Enter sequence to analyze:")
+    entryText = tk.Label(proteinWindow,text = "Enter sequence to analyze:")
     entryText.pack()
 
     #creates and packs entry text box
-    sequenceEntry = tk.Text(dnaWindow, height = 5, borderwidth = 2, relief = tk.GROOVE)
+    sequenceEntry = tk.Text(proteinWindow, height = 5, borderwidth = 2, relief = tk.GROOVE)
     sequenceEntry.pack()
 
     #creates and packs Radiobutton for single or FASTA input select
     seqTypeVar = tk.IntVar() #variable to store Radiobutton value
     #value of 1 == single seq, value == 2 FASTA
-    singleSeq = tk.Radiobutton(dnaWindow, text = "Single Sequence", variable = seqTypeVar, value = 1)
-    multiSeq = tk.Radiobutton(dnaWindow, text = "FASTA", variable = seqTypeVar, value = 2)
+    singleSeq = tk.Radiobutton(proteinWindow, text = "Single Sequence", variable = seqTypeVar, value = 1)
+    multiSeq = tk.Radiobutton(proteinWindow, text = "FASTA", variable = seqTypeVar, value = 2)
     singleSeq.pack()
     multiSeq.pack()
 
     #creates and packs lable of analysis options
-    analysisText = tk.Label(dnaWindow, text = 'Analysis Options:')
+    analysisText = tk.Label(proteinWindow, text = 'Analysis Options:')
     analysisText.pack()
 
     #create and pack checkbuttons for analysis options
     #crates variables to store analysis variable options to
-    gcVar = tk.IntVar()
-    gcContentSelect = tk.Checkbutton(dnaWindow, text = 'GC Content', variable = gcVar)
-    gcContentSelect.pack()
-    revCompVar = tk.IntVar()
-    reverseCompSelect = tk.Checkbutton(dnaWindow, text = 'Reverse Complement', variable = revCompVar)
-    reverseCompSelect.pack()
-    transVar = tk.IntVar()
-    transcriptionSelect = tk.Checkbutton(dnaWindow, text = 'Transciption', variable = transVar)
-    transcriptionSelect.pack()
-    translationVar = tk.IntVar()
-    translationSelect = tk.Checkbutton(dnaWindow, text = 'Translation', variable = translationVar)
-    translationSelect.pack()
+    molecWeightVar = tk.IntVar()
+    molecWeighttSelect = tk.Checkbutton(proteinWindow, text = 'Molecular Weight', variable = molecWeightVar)
+    molecWeighttSelect.pack()
+    oneToThreeVar = tk.IntVar()
+    onetoThreeVarSelect = tk.Checkbutton(proteinWindow, text = 'One-to-Three', variable = oneToThreeVar)
+    onetoThreeVarSelect.pack()
+    threeToOneVar = tk.IntVar()
+    threeToOneSelect = tk.Checkbutton(proteinWindow, text = 'Three-to-One', variable = threeToOneVar)
+    threeToOneSelect.pack()
+    isoVar = tk.IntVar()
+    isoelectricSelect = tk.Checkbutton(proteinWindow, text = 'Isoelectric Point', variable = isoVar)
+    isoelectricSelect.pack()
+    netChargeVar = tk.IntVar()
+    netChargeSelect = tk.Checkbutton(proteinWindow, text = 'Net Charge', variable = netChargeVar)
+    isoelectricSelect.pack()
 
     #create and pack button to analyse the seq, connected to buttonClick func
-    analyzeButton = tk.Button(dnaWindow, text = "Analyze", command = buttonClick)
+    analyzeButton = tk.Button(proteinWindow, text = "Analyze", command = buttonClick)
     analyzeButton.pack()
 
     #create and pack output box label
-    outputText = tk.Label(dnaWindow, text = "Analysis Output:") #add text to denote output
+    outputText = tk.Label(proteinWindow, text = "Analysis Output:") #add text to denote output
     outputText.pack()
 
     #create and pack output box
-    outputWindow = tk.Text(dnaWindow, height = 10, borderwidth = 2, relief = tk.GROOVE)
+    outputWindow = tk.Text(proteinWindow, height = 10, borderwidth = 2, relief = tk.GROOVE)
     outputWindow.pack()
 
-    dnaWindow.mainloop() #run window loop
+    proteinWindow.mainloop() #run window loop
 
 #create and label menu window
 menuWindow = tk.Tk()
