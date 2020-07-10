@@ -7,21 +7,28 @@ from readFASTA import * #import all funcs from readFASTA
 def buttonClick():
 
     outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
-    print(sequenceEntry.get('1.0', 'end-1c'))
-    print(readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines()))
-    """
-    sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
 
-    #for each button, checks if selected. if True, output is printed
-    if gcVar.get() == 1:
-        outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
-    if revCompVar.get() == 1:
-        outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
-    if transVar.get() == 1:
-        outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
-    if translationVar.get() == 1:
-        outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
-    """
+#------------------------------single line entry analysis----------------------
+    if seqTypeVar.get() == 1: #single line entry
+        sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
+
+        #for each button, checks if selected. if True, output is printed
+        if gcVar.get() == 1:
+            outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
+        if revCompVar.get() == 1:
+            outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
+        if transVar.get() == 1:
+            outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
+        if translationVar.get() == 1:
+            outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
+#----------------------------FASTA input analysis------------------------------
+    elif seqTypeVar.get() == 2: #FASTA input
+        seqEntryDict = readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines())
+
+        for entry in seqEntryDict:
+            outputWindow.insert(tk.INSERT, str(entry) + '\n')
+
+
 window = tk.Tk() #create tkinter winde
 window.title("Bioinformatics Suite") #changes title of window
 greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to the window
