@@ -26,7 +26,17 @@ def buttonClick():
         seqEntryDict = readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines())
 
         for entry in seqEntryDict:
-            outputWindow.insert(tk.INSERT, str(entry) + '\n')
+            outputWindow.insert(tk.INSERT, "Sequence ID: " + str(entry) + '\n')
+            sequence = dnaSeqCheck(seqEntryDict[entry])
+            #for each button, checks if selected. if True, output is printed
+            if gcVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
+            if revCompVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
+            if transVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
+            if translationVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
 
 
 window = tk.Tk() #create tkinter winde
