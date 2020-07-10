@@ -3,13 +3,13 @@ from dnaFuncs import * #import all functions from dnaFuncs
 from proteinFuncs import * #import all funcs from proteinFuncs
 from readFASTA import * #import all funcs from readFASTA
 
-#function to get value of checkbuttons
 def buttonClick():
 
     outputWindow.delete('1.0', tk.END) #delete all entries in outputWindow
 
 #------------------------------single line entry analysis----------------------
     if seqTypeVar.get() == 1: #single line entry
+        #proof read sequence
         sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
 
         #for each button, checks if selected. if True, output is printed
@@ -26,7 +26,9 @@ def buttonClick():
         seqEntryDict = readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines())
 
         for entry in seqEntryDict:
+            #prints seq id to text box
             outputWindow.insert(tk.INSERT, "Sequence ID: " + str(entry) + '\n')
+            #proof read sequence
             sequence = dnaSeqCheck(seqEntryDict[entry])
             #for each button, checks if selected. if True, output is printed
             if gcVar.get() == 1:
@@ -41,49 +43,52 @@ def buttonClick():
 
 window = tk.Tk() #create tkinter winde
 window.title("Bioinformatics Suite") #changes title of window
-greeting = tk.Label(text = "Enter sequence to analyze:") #adds a test text to the window
-analysisText = tk.Label(text = 'Analysis Options:')
 
-#determine if single sequence or FASTA
-seqTypeVar = tk.IntVar()
+ #creates and packs label for text entry box
+entryText = tk.Label(text = "Enter sequence to analyze:")
+entryText.pack()
+
+#creates and packs entry text box
+sequenceEntry = tk.Text(height = 5, borderwidth = 2, relief = tk.GROOVE)
+sequenceEntry.pack()
+
+#creates and packs Radiobutton for single or FASTA input select
+seqTypeVar = tk.IntVar() #variable to store Radiobutton value
+#value of 1 == single seq, value == 2 FASTA
 singleSeq = tk.Radiobutton(text = "Single Sequence", variable = seqTypeVar, value = 1)
 multiSeq = tk.Radiobutton(text = "FASTA", variable = seqTypeVar, value = 2)
-
-#create varaible to save the value of the checkbuttons
-entryScrollbar = tk.Scrollbar()
-entryScrollbar.pack(side = tk.RIGHT, fill = tk.Y)
-sequenceEntry = tk.Text(yscrollcommand = entryScrollbar.set,height = 5, borderwidth = 2, relief = tk.GROOVE)
-
-gcVar = tk.IntVar()
-revCompVar = tk.IntVar()
-transVar = tk.IntVar()
-translationVar = tk.IntVar()
-
-#create the check buttons for the various DNA functions
-gcContentSelect = tk.Checkbutton(text = 'GC Content', variable = gcVar)
-reverseCompSelect = tk.Checkbutton(text = 'Reverse Complement', variable = revCompVar)
-transcriptionSelect = tk.Checkbutton(text = 'Transciption', variable = transVar)
-translationSelect = tk.Checkbutton(text = 'Translation', variable = translationVar)
-
-#create button to analyse the seq, connected to buttonClick func
-analyzeButton = tk.Button(text = "Analyze", command = buttonClick)
-
-outputText = tk.Label(text = "Analysis Output:") #add text to denote output
-
-outputWindow = tk.Text(height = 10, borderwidth = 2, relief = tk.GROOVE)
-
-#pack all components into window
-greeting.pack()
-sequenceEntry.pack()
 singleSeq.pack()
 multiSeq.pack()
+
+#creates and packs lable of analysis options
+analysisText = tk.Label(text = 'Analysis Options:')
 analysisText.pack()
+
+#create and pack checkbuttons for analysis options
+#crates variables to store analysis variable options to
+gcVar = tk.IntVar()
+gcContentSelect = tk.Checkbutton(text = 'GC Content', variable = gcVar)
 gcContentSelect.pack()
+revCompVar = tk.IntVar()
+reverseCompSelect = tk.Checkbutton(text = 'Reverse Complement', variable = revCompVar)
 reverseCompSelect.pack()
+transVar = tk.IntVar()
+transcriptionSelect = tk.Checkbutton(text = 'Transciption', variable = transVar)
 transcriptionSelect.pack()
+translationVar = tk.IntVar()
+translationSelect = tk.Checkbutton(text = 'Translation', variable = translationVar)
 translationSelect.pack()
+
+#create and pack button to analyse the seq, connected to buttonClick func
+analyzeButton = tk.Button(text = "Analyze", command = buttonClick)
 analyzeButton.pack()
+
+#create and pack output box label
+outputText = tk.Label(text = "Analysis Output:") #add text to denote output
 outputText.pack()
+
+#create and pack output box
+outputWindow = tk.Text(height = 10, borderwidth = 2, relief = tk.GROOVE)
 outputWindow.pack()
 
 window.mainloop() #run window loop
