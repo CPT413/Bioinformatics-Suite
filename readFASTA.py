@@ -17,9 +17,7 @@ def readFASTA(text):
         else: #if a line does not start with ">" then it is a seq
             sequence = ''.join(line[:].strip())
 
-        sequenceDictionary[header] = dnaSeqCheck(sequence) #first pass, the holder is
+        sequenceDictionary[header] = sequence #first pass, the holder is
                                         #added, second time the seq is added
-                                        #the sequence is checked to contain the
-                                        #right characters
 
     return(sequenceDictionary)
