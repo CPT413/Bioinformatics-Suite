@@ -112,17 +112,23 @@ def proteinGUI():
     #------------------------------single line entry analysis----------------------
         if seqTypeVar.get() == 1: #single line entry
             #proof read sequence
-            sequence = dnaSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
+            sequence, style = proteinSeqCheck(sequenceEntry.get('1.0', 'end-1c')) #checks that seq is valid
 
             #for each button, checks if selected. if True, output is printed
-            if gcVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
-            if revCompVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
-            if transVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
-            if translationVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
+            if molecWeightVar.get() == 1:
+                if style == 3:
+                    sequence = threeToOne(sequence)
+                    outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(sequence))+"\n")
+                else:
+                    outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(sequence))+"\n")
+            if (oneToThreeVar.get() == 1) and (style == 1):
+                outputWindow.insert(tk.INSERT, "One-to-Three: " + oneToThree(sequence)+"\n")
+            if (threeToOneVar.get() == 1) and (style == 3):
+                outputWindow.insert(tk.INSERT, "Three-to-one: " + threeToOne(sequence)+"\n")
+            if isoVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(sequence))+"\n")
+            if netChargeVar.get() == 1:
+                outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(sequence, float(netChargepH.get('1.0', 'end-1c'))))+"\n")
     #----------------------------FASTA input analysis------------------------------
         elif seqTypeVar.get() == 2: #FASTA input
             seqEntryDict = readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines())
@@ -182,7 +188,11 @@ def proteinGUI():
     isoelectricSelect.pack()
     netChargeVar = tk.IntVar()
     netChargeSelect = tk.Checkbutton(proteinWindow, text = 'Net Charge', variable = netChargeVar)
-    isoelectricSelect.pack()
+    netChargeSelect.pack()
+    pHLabel = tk.Label(proteinWindow, text = "pH to determine Net-Charge")
+    pHLabel.pack()
+    netChargepH = tk.Text(proteinWindow, height = 1, width = 5, borderwidth = 2, relief = tk.GROOVE)
+    netChargepH.pack()
 
     #create and pack button to analyse the seq, connected to buttonClick func
     analyzeButton = tk.Button(proteinWindow, text = "Analyze", command = buttonClick)
