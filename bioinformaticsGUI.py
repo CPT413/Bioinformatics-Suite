@@ -117,8 +117,7 @@ def proteinGUI():
             #for each button, checks if selected. if True, output is printed
             if molecWeightVar.get() == 1:
                 if style == 3:
-                    sequence = threeToOne(sequence)
-                    outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(sequence))+"\n")
+                    outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(threeToOne(sequence)))+"\n")
                 else:
                     outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(sequence))+"\n")
             if (oneToThreeVar.get() == 1) and (style == 1):
@@ -126,9 +125,15 @@ def proteinGUI():
             if (threeToOneVar.get() == 1) and (style == 3):
                 outputWindow.insert(tk.INSERT, "Three-to-one: " + threeToOne(sequence)+"\n")
             if isoVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(sequence))+"\n")
+                if style == 3:
+                    outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(threeToOne(sequence)))+"\n")
+                else:
+                    outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(sequence))+"\n")
             if netChargeVar.get() == 1:
-                outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(sequence, float(netChargepH.get('1.0', 'end-1c'))))+"\n")
+                if style == 3:
+                    outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(threeToOne(sequence), float(netChargepH.get('1.0', 'end-1c'))))+"\n")
+                else:
+                    outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(sequence, float(netChargepH.get('1.0', 'end-1c'))))+"\n")
     #----------------------------FASTA input analysis------------------------------
         elif seqTypeVar.get() == 2: #FASTA input
             seqEntryDict = readFASTA(sequenceEntry.get('1.0', 'end-1c').splitlines())
