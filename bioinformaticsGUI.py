@@ -45,7 +45,7 @@ def dnaGUI():
                     outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
                 if translationVar.get() == 1:
                     outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
-
+                outputWindow.insert(tk.INSERT, "\n")
 
     dnaWindow = tk.Toplevel(master=menuWindow)
     dnaWindow.title("DNA Suite") #changes title of window
@@ -142,18 +142,30 @@ def proteinGUI():
                 #prints seq id to text box
                 outputWindow.insert(tk.INSERT, "Sequence ID: " + str(entry) + '\n')
                 #proof read sequence
-                sequence = dnaSeqCheck(seqEntryDict[entry])
+                sequence, style = proteinSeqCheck(seqEntryDict[entry]) #checks that seq is valid
+
                 #for each button, checks if selected. if True, output is printed
-                if gcVar.get() == 1:
-                    outputWindow.insert(tk.INSERT, "GC content: " + str(gcContent(sequence))+"\n")
-                if revCompVar.get() == 1:
-                    outputWindow.insert(tk.INSERT, "Reverse complement: " + reverseComp(sequence)+"\n")
-                if transVar.get() == 1:
-                    outputWindow.insert(tk.INSERT, "Transciption: " + transcription(sequence)+"\n")
-                if translationVar.get() == 1:
-                    outputWindow.insert(tk.INSERT, "Translation: " + translation(sequence)+"\n")
+                if molecWeightVar.get() == 1:
+                    if style == 3:
+                        outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(threeToOne(sequence)))+"\n")
+                    else:
+                        outputWindow.insert(tk.INSERT, "Molecular Weight (g/mol): " + str(molecularWeight(sequence))+"\n")
+                if (oneToThreeVar.get() == 1) and (style == 1):
+                    outputWindow.insert(tk.INSERT, "One-to-Three: " + oneToThree(sequence)+"\n")
+                if (threeToOneVar.get() == 1) and (style == 3):
+                    outputWindow.insert(tk.INSERT, "Three-to-one: " + threeToOne(sequence)+"\n")
+                if isoVar.get() == 1:
+                    if style == 3:
+                        outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(threeToOne(sequence)))+"\n")
+                    else:
+                        outputWindow.insert(tk.INSERT, "Isoelectric Point: " + str(isoelectricPoint(sequence))+"\n")
+                if netChargeVar.get() == 1:
+                    if style == 3:
+                        outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(threeToOne(sequence), float(netChargepH.get('1.0', 'end-1c'))))+"\n")
+                    else:
+                        outputWindow.insert(tk.INSERT, "Net-Charge: " + str(netCharge(sequence, float(netChargepH.get('1.0', 'end-1c'))))+"\n")
 
-
+                outputWindow.insert(tk.INSERT, "\n") #adds line break between entries
     proteinWindow = tk.Toplevel(master=menuWindow)
     proteinWindow.title("Protein Suite") #changes title of window
 
