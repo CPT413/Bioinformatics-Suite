@@ -5,31 +5,35 @@ const dnaSeqCheck = sequence => {
   */
 
 }
- const gcContent = sequence => {
+const gcContent = sequence => {
   /*
   This function will calculate the gc content for a given sequence. Returns
   the percent gc.
   */
+  //find number of 'g': (sequence.match(/g/g) || []).length;
+  //find number of 'c':  (sequence.match(/c/g) || []).length;
+  //add those togther and divide by length of sequence and multiply by 100
+  return ((((sequence.match(/g/g) || []).length +
+  (sequence.match(/c/g) || []).length) / sequence.length) * 100);
+}
 
- }
-
- const reverseComp = sequence => {
+const reverseComp = sequence => {
   /*
   This function will allow for the reverse complement of an input sequence to
   be determined. Returns a string that is reverse complement.
   */
 
- }
+}
 
- const transcription = sequence => {
+const transcription = sequence => {
   /*
   This funcion allows for the transcription of dna to rna for the input
   sequence. Returns a string that is the rna transcript.
   */
 
- }
+}
 
- const translation = sequence => {
+const translation = sequence => {
   /*
   This function will allow for the DNA sequence to be translated into the
   corresponding protein sequence. It finds the first start codon (ATG) in the
@@ -38,4 +42,4 @@ const dnaSeqCheck = sequence => {
   is in the 1-letter code.
   */
 
- }
+}
