@@ -74,10 +74,8 @@ def translation(sequence):
     This function will allow for the DNA sequence to be translated into the
     corresponding protein sequence. It finds the first start codon (ATG) in the
     sequence and all of the stop codons (TAA, TAG, TGA). The protein will be
-    translated using the start and first stop codon, the code will check if the
-    length is divisible by 3. If it is then the translation will be done.
-    If not that combination is ignored. The translated protein is in the
-    1-letter code.
+    translated using the start and first stop codon. The translated protein
+    is in the 1-letter code.
     """
     #sets dictionary for the codons and the corresponding amino acid. stop
     #codons are correspond to ''
