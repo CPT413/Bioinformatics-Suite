@@ -5,6 +5,7 @@ const dnaSeqCheck = sequence => {
   */
 
 }
+
 const gcContent = sequence => {
   /*
   This function will calculate the gc content for a given sequence. Returns
