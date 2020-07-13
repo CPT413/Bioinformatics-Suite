@@ -54,9 +54,19 @@ const transcription = sequence => {
   This funcion allows for the transcription of dna to rna for the input
   sequence. Returns a string that is the rna transcript.
   */
+  let trasncript = [];
 
+  for(let i = 0; i < sequence.length; i++) {
+    if(sequence[i] === 't') {
+      trasncript.push('u');
+    }
+    else {
+      trasncript.push(sequence[i]);
+    }
+  }
+  return (trasncript.toString().replace(/,/g, ''))
 }
-
+console.log(transcription('atg'));
 const translation = sequence => {
   /*
   This function will allow for the DNA sequence to be translated into the
