@@ -44,7 +44,7 @@ const reverseComp = sequence => {
       reverse.push('a');
     }
   }
-  //convert array to string, replace commas with '' and return value
+  //convert array to string, replace commas with '', and return value
   return (reverse.toString().replace(/,/g,''));
 
 }
@@ -54,19 +54,23 @@ const transcription = sequence => {
   This funcion allows for the transcription of dna to rna for the input
   sequence. Returns a string that is the rna transcript.
   */
-  let trasncript = [];
+  let trasncript = []; //create empty array to add bases to
 
+  //loop over every base in sequence
   for(let i = 0; i < sequence.length; i++) {
+    //if the base is a 't', push 'u' to array
     if(sequence[i] === 't') {
       trasncript.push('u');
     }
+    //all other bases are pushed to array
     else {
       trasncript.push(sequence[i]);
     }
   }
+  //convert array to string, replace commas with '', return value
   return (trasncript.toString().replace(/,/g, ''))
 }
-console.log(transcription('atg'));
+
 const translation = sequence => {
   /*
   This function will allow for the DNA sequence to be translated into the
