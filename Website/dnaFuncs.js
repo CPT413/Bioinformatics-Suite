@@ -23,25 +23,32 @@ const reverseComp = sequence => {
   This function will allow for the reverse complement of an input sequence to
   be determined. Returns a string that is reverse complement.
   */
-  let reverse = [];
+  let reverse = []; //creates empty array to add reverse base to
+
+  //loops over bases in sequence in reverse order
   for(let i = sequence.length-1; i >=0; i--) {
+    //if the base is an 'a', push 't' to array
     if(sequence[i] === 'a') {
-      reverse.push('t')
+      reverse.push('t');
     }
+    //if the base is an 'c', push 'g' to array
     else if (sequence[i] === 'c') {
-      reverse.push('g')
+      reverse.push('g');
     }
+    //if the base is an 'g', push 'c' to array
     else if (sequence[i] === 'g') {
-      reverse.push('c')
+      reverse.push('c');
     }
+    //if the base is an 't', push 'a' to array
     else{
-      reverse.push('a')
+      reverse.push('a');
     }
   }
-  return (reverse.toString().replace(/,/g,''))
+  //convert array to string, replace commas with '' and return value
+  return (reverse.toString().replace(/,/g,''));
 
 }
-console.log(reverseComp('atcgatatcgcgatatcg'))
+
 const transcription = sequence => {
   /*
   This funcion allows for the transcription of dna to rna for the input
