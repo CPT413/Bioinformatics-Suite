@@ -6,12 +6,13 @@ const dnaSeqCheck = sequence => {
   const allowedChars = ['a', 'g', 'c', 't'];
   for (var base = 0; base < sequence.length; base++) {
     if(allowedChars.indexOf(sequence[base]) === -1) {
-      console.log('Not a valid base.');
+      throw new Error('A base in your sequence is not a nucleotide');
     }
   }
+  return (sequence);
 
 }
-dnaSeqCheck('atcgctatahcgcta');
+console.log(dnaSeqCheck('atcgctatacgcta'));
 const gcContent = sequence => {
   /*
   This function will calculate the gc content for a given sequence. Returns
