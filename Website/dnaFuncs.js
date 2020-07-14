@@ -79,6 +79,7 @@ const translation = sequence => {
   translated using the start and first stop codon. The translated protein
   is in the 1-letter code.
   */
+  //create dictionary for refernce of codons and corresponding amino acid
   const codons = {
     'ttt': 'F',
     'ttc': 'F',
@@ -145,17 +146,25 @@ const translation = sequence => {
     'gga': 'G',
     'ggg': 'G'
   };
-  let startSite = sequence.indexOf('atg');
-  let protein = [];
+  let startSite = sequence.indexOf('atg');//find index of first 'atg'
+  let protein = [];//create empy array to push amino acids to
 
+  //loop over entire sequence beginning at start site, increment index by
+  //3 to move to the first base of the next codon
   for (let codon = startSite; codon < sequence.length; codon += 3) {
-    if (codons[sequence.slice(codon, codon + 3)] === 'taa' || codons[sequence.slice(codon, codon + 3)] === 'tag' || codons[sequence.slice(codon, codon + 3)] === 'tga') {
+    //if the codon matches a stop codon, break out of the loop
+    if (codons[sequence.slice(codon, codon + 3)] === 'taa'||
+        codons[sequence.slice(codon, codon + 3)] === 'tag'||
+        codons[sequence.slice(codon, codon + 3)] === 'tga') {
       break;
-    } else {
+    }
+    //otherwise, push the corresponding amino acid for the codon
+    else {
       protein.push(codons[sequence.slice(codon, codon + 3)])
     }
   }
+  //for some reason, a space is pushed to the end of the list, pop that
   protein.pop();
-  console.log(protein.toString().replace(/,/g, ''));
+  //comert array to string, replaces commas with '', return value
+  return (protein.toString().replace(/,/g, ''));
 }
-translation('aatgattgcatag');
