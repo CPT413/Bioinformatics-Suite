@@ -15,7 +15,7 @@ const gcContent = sequence => {
   //find number of 'c':  (sequence.match(/c/g) || []).length;
   //add those togther and divide by length of sequence and multiply by 100
   return ((((sequence.match(/g/g) || []).length +
-  (sequence.match(/c/g) || []).length) / sequence.length) * 100);
+    (sequence.match(/c/g) || []).length) / sequence.length) * 100);
 }
 
 const reverseComp = sequence => {
@@ -26,9 +26,9 @@ const reverseComp = sequence => {
   let reverse = []; //creates empty array to add reverse base to
 
   //loops over bases in sequence in reverse order
-  for(let i = sequence.length-1; i >=0; i--) {
+  for (let i = sequence.length - 1; i >= 0; i--) {
     //if the base is an 'a', push 't' to array
-    if(sequence[i] === 'a') {
+    if (sequence[i] === 'a') {
       reverse.push('t');
     }
     //if the base is an 'c', push 'g' to array
@@ -40,12 +40,12 @@ const reverseComp = sequence => {
       reverse.push('c');
     }
     //if the base is an 't', push 'a' to array
-    else{
+    else {
       reverse.push('a');
     }
   }
   //convert array to string, replace commas with '', and return value
-  return (reverse.toString().replace(/,/g,''));
+  return (reverse.toString().replace(/,/g, ''));
 
 }
 
@@ -57,9 +57,9 @@ const transcription = sequence => {
   let trasncript = []; //create empty array to add bases to
 
   //loop over every base in sequence
-  for(let i = 0; i < sequence.length; i++) {
+  for (let i = 0; i < sequence.length; i++) {
     //if the base is a 't', push 'u' to array
-    if(sequence[i] === 't') {
+    if (sequence[i] === 't') {
       trasncript.push('u');
     }
     //all other bases are pushed to array
@@ -147,7 +147,15 @@ const translation = sequence => {
   };
   let startSite = sequence.indexOf('atg');
   let protein = [];
-  console.log(startSite);
-  
+
+  for (let codon = startSite; codon < sequence.length; codon += 3) {
+    if (codons[sequence.slice(codon, codon + 3)] === 'taa' || codons[sequence.slice(codon, codon + 3)] === 'tag' || codons[sequence.slice(codon, codon + 3)] === 'tga') {
+      break;
+    } else {
+      protein.push(codons[sequence.slice(codon, codon + 3)])
+    }
+  }
+  protein.pop();
+  console.log(protein.toString().replace(/,/g, ''));
 }
-translation('aatg');
+translation('aatgattgcatag');
