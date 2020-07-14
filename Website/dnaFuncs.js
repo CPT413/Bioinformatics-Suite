@@ -3,16 +3,22 @@ const dnaSeqCheck = sequence => {
   This function will be used to proofread the entered sequence before
   processing. The function qill return a sequence in lower-case format
   */
+  //create array of the allowed bases
   const allowedChars = ['a', 'g', 'c', 't'];
+  //loop over every base in the sequence
   for (var base = 0; base < sequence.length; base++) {
+    //if the character is not in the allowedChars array
     if(allowedChars.indexOf(sequence[base]) === -1) {
+      //throw an error telling user that the sequence contains a character
+      //other than an 'a', 't', 'g', or 'c'. Breaks the loop
       throw new Error('A base in your sequence is not a nucleotide');
     }
   }
+  //if no characters are wrong, return the sequence
   return (sequence);
 
 }
-console.log(dnaSeqCheck('atcgctatacgcta'));
+
 const gcContent = sequence => {
   /*
   This function will calculate the gc content for a given sequence. Returns
