@@ -3,9 +3,15 @@ const dnaSeqCheck = sequence => {
   This function will be used to proofread the entered sequence before
   processing. The function qill return a sequence in lower-case format
   */
+  const allowedChars = ['a', 'g', 'c', 't'];
+  for (var base = 0; base < sequence.length; base++) {
+    if(allowedChars.indexOf(sequence[base]) === -1) {
+      console.log('Not a valid base.');
+    }
+  }
 
 }
-
+dnaSeqCheck('atcgctatahcgcta');
 const gcContent = sequence => {
   /*
   This function will calculate the gc content for a given sequence. Returns
