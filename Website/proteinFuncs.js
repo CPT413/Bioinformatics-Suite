@@ -52,9 +52,43 @@ const oneToThree = sequence => {
   Converts a sequence of amino acids in single-letter abbreviation to the
   corresponding three-letter abbreviation
   */
+  const oneLetter = {
+    'A': 'Ala',
+    'R': 'Arg',
+    'N': 'Asn',
+    'D': 'Asp',
+    'C': 'Cys',
+    'E': 'Glu',
+    'Q': 'Gln',
+    'G': 'Gly',
+    'H': 'His',
+    'I': 'Ile',
+    'L': 'Leu',
+    'K': 'Lys',
+    'M': 'Met',
+    'F': 'Phe',
+    'P': 'Pro',
+    'S': 'Ser',
+    'T': 'Thr',
+    'W': 'Trp',
+    'Y': 'Tyr',
+    'V': 'Val'
+    }
 
+    let threeLetter = [];
+
+    for (var residue = 0; residue < sequence.length; residue++) {
+      if (residue === sequence.length - 1) {
+        threeLetter.push(oneLetter[sequence[residue]]);
+      }
+      else {
+        threeLetter.push(oneLetter[sequence[residue]] + '-');
+      }
+    }
+    console.log(threeLetter.toString().replace(/,/g, ''));
 }
 
+oneToThree('ATGILVRNQEDWTY');
 const threeToOne = sequence => {
   /*
   Converts a sequence of amino acids in three-letter abbreviation to the
