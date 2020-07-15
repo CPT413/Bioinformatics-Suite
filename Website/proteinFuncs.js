@@ -100,8 +100,35 @@ const threeToOne = sequence => {
   corresponding single-letter abbreviation
   */
 
-}
+  const threeLetter = {
+    'Cys': 'C',
+    'Asp': 'D',
+    'Ser': 'S',
+    'Gln': 'Q',
+    'Lys': 'K',
+    'Trp': 'W',
+    'Asn': 'N',
+    'Pro': 'P',
+    'Thr': 'T',
+    'Phe': 'F',
+    'Ala': 'A',
+    'Gly': 'G',
+    'Ile': 'I',
+    'Leu': 'L',
+    'His': 'H',
+    'Arg': 'R',
+    'Met': 'M',
+    'Val': 'V',
+    'Glu': 'E',
+    'Tyr': 'Y'}
+    let oneLetter = [];
 
+    for (var residue = 0; residue < sequence.split('-').length; residue++) {
+      oneLetter.push(threeLetter[sequence.split('-')[residue]]);
+    }
+    console.log(oneLetter);
+}
+threeToOne('His-Tyr-Asn-Asp');
 const isoelectricPoint = sequence => {
   /*
   This function will determine the isoelectric point of the given amino acids
