@@ -148,6 +148,8 @@ const netCharge = (sequence, pH) => {
   This function will be used to determine the net charge of a protein at a
   specified pH value.
   */
+  //dictionary of the pKas for each amino acid. Each key corresponds to a list
+  //with the pKa value [carboxyl, amino, side-chain]
   const pKaDict = {
     'G': [2.34,9.60, undefined],
     'A': [2.34, 9.69, undefined],
@@ -170,31 +172,45 @@ const netCharge = (sequence, pH) => {
     'K': [2.18, 8.95, 10.79],
     'R': [2.17, 9.04, 12.48]
   };
-    let charge = 0;
+    let charge = 0; //create variable to keep track of charge
+    //loop over every residue in the sequence
     for (var residue = 0; residue < sequence.length; residue++) {
 //------------------------first residue----------------------------------------
       if(residue === 0) {
+        //checks to see if the pH is less than the pKa associated with the
+        //N-terminus
         if(pH <= pKaDict[sequence[residue]][1]) {
+          //if it is, add +1 to the charge
           charge++;
+          //logic for side chain pKa
+          //check to see if the residue does have a sidechain with pKa
           if(pKaDict[sequence[residue]][2] != undefined) {
+            //if the residue is a C or Y
             if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+              //if pH greater than the pKa of residue, subtract 1
               if(pH >= pKaDict[sequence[residue]][2]) {
                 charge--;
               }
             }
+            //if the residue is a D or E
             else if (sequence[residue] === 'D' || sequence[residue] === 'E') {
+              //if pH greater than pKa, subtract 1
               if(pH >= pKaDict[sequence[residue]][2]) {
                 charge--;
               }
             }
+            //if residue is a K, R, or H
             else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+              //if pH less than pKa, add 1
               if(pH <= pKaDict[sequence[residue]][2]) {
                 charge++;
               }
             }
           }
         }
+        //if the pH > pKa
         else {
+          //run through side chain logic, see above
           if(pKaDict[sequence[residue]][2] != undefined) {
             if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
               if(pH >= pKaDict[sequence[residue]][2]) {
@@ -216,8 +232,12 @@ const netCharge = (sequence, pH) => {
       }
 //---------------------------last residue--------------------------------------
       else if (residue === sequence.length-1) {
+        //checks to see if pH is greater than pKa associated with the C-
+        //terminus
         if(pH >= pKaDict[sequence[residue]][0]) {
+          //subtract 1 if it is
           charge--;
+          //run through sidechain logic, see above
           if(pKaDict[sequence[residue]][2] != undefined) {
             if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
               if(pH >= pKaDict[sequence[residue]][2]) {
@@ -236,7 +256,9 @@ const netCharge = (sequence, pH) => {
             }
           }
         }
+        //if pH < pKa
         else{
+          //run through sidechain logic, see above
           if(pKaDict[sequence[residue]][2] != undefined) {
             if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
               if(pH >= pKaDict[sequence[residue]][2]) {
@@ -258,6 +280,7 @@ const netCharge = (sequence, pH) => {
       }
 //-----------------------------all other residues------------------------------
       else {
+        //run through sidechain logic, see above
         if(pKaDict[sequence[residue]][2] != undefined) {
           if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
             if(pH >= pKaDict[sequence[residue]][2]) {
@@ -277,6 +300,5 @@ const netCharge = (sequence, pH) => {
         }
       }
     }
-    return (charge);
+    return (charge); //return value of charge
 }
-console.log(netCharge('NDDCYTILV',7))
