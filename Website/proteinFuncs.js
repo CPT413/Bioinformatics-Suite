@@ -99,7 +99,8 @@ const threeToOne = sequence => {
   Converts a sequence of amino acids in three-letter abbreviation to the
   corresponding single-letter abbreviation
   */
-
+  //dictionary of the three-letter abbreviations and the corresponding
+  //one-letter abbreviations
   const threeLetter = {
     'Cys': 'C',
     'Asp': 'D',
@@ -121,14 +122,18 @@ const threeToOne = sequence => {
     'Val': 'V',
     'Glu': 'E',
     'Tyr': 'Y'}
-    let oneLetter = [];
 
+    let oneLetter = []; //create empyt array to push one letter to
+
+    //loop over sequence split at the '-'
     for (var residue = 0; residue < sequence.split('-').length; residue++) {
+      //push the correspondind one letter to the array
       oneLetter.push(threeLetter[sequence.split('-')[residue]]);
     }
-    console.log(oneLetter);
+    //convert array to string, replace ',' with '', return value
+    return (oneLetter.toString().replace(/,/g, ''));
 }
-threeToOne('His-Tyr-Asn-Asp');
+
 const isoelectricPoint = sequence => {
   /*
   This function will determine the isoelectric point of the given amino acids
