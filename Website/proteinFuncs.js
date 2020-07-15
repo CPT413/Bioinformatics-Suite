@@ -140,6 +140,8 @@ const isoelectricPoint = sequence => {
   sequence. The calculation will be made assuming body temperature (37C) and
   standard conditions.
   */
+  //dictionary of the pKas for each amino acid. Each key corresponds to a list
+  //with the pKa value [carboxyl, amino, side-chain]
   const pKaDict = {
     'G': [2.34,9.60, undefined],
     'A': [2.34, 9.69, undefined],
@@ -162,42 +164,50 @@ const isoelectricPoint = sequence => {
     'K': [2.18, 8.95, 10.79],
     'R': [2.17, 9.04, 12.48]
   };
-  let pKaList = [];
-  let neutralpH = 0;
+  let pKaList = []; //empty array to push all pKa values to in sequence
+  let neutralpH = 0; //create variable to save the pH at which charge = 0
 
+  //loop over all residues and add applicable pKas
   for (var residue = 0; residue < sequence.length; residue++) {
 //-----------------------first residue-----------------------------------------
     if(residue === 0) {
-      pKaList.push(pKaDict[sequence[residue]][1])
+      pKaList.push(pKaDict[sequence[residue]][1]); //push pKa pf N-terminus
+      //if residue has side-chain with pka, push value
       if(pKaDict[sequence[residue]][2] != undefined) {
-        pKaList.push(pKaDict[sequence[residue]][2])
+        pKaList.push(pKaDict[sequence[residue]][2]);
       }
     }
 //-----------------------last residue------------------------------------------
     else if (residue === sequence.length-1) {
-      pKaList.push(pKaDict[sequence[residue]][0])
+      pKaList.push(pKaDict[sequence[residue]][0]); //push pKa pf C-terminus
+      //if residue has side-chain with pka, push value
       if(pKaDict[sequence[residue]][2] != undefined) {
-        pKaList.push(pKaDict[sequence[residue]][2])
+        pKaList.push(pKaDict[sequence[residue]][2]);
       }
     }
 //-------------------------all other residues----------------------------------
     else {
+      //if residue has side-chain with pka, push value
       if(pKaDict[sequence[residue]][2] != undefined) {
-        pKaList.push(pKaDict[sequence[residue]][2])
+        pKaList.push(pKaDict[sequence[residue]][2]);
       }
     }
   }
-
+  //loop to find the pH at which the sequence has no net charge
   for (let pH = 1; pH <= 12; pH++) {
+    //if the sequence is neutral at given pH
     if (netCharge(sequence, pH) === 0) {
+      //push that pH to pKa list
       pKaList.push(pH)
-      neutralpH = pH
+      neutralpH = pH //save the value of the pH to the variable neutralpH
     }
   }
-  pKaList = pKaList.sort((a,b) => a-b)
 
+  pKaList = pKaList.sort((a,b) => a-b)//sort pka list
+  //finds average of pKas on either side of neutral pH, this is the agreed on
+  //easy way to determine isoelectic point
   let isoPoint = (pKaList[pKaList.indexOf(neutralpH) - 1] + pKaList[pKaList.indexOf(neutralpH) + 1])/2;
-  console.log(isoPoint)
+  return (isoPoint);
 }
 
 
@@ -360,4 +370,3 @@ const netCharge = (sequence, pH) => {
     }
     return (charge); //return value of charge
 }
-isoelectricPoint('ATGHCRQN');
