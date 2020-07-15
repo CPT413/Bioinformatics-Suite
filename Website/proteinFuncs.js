@@ -172,19 +172,111 @@ const netCharge = (sequence, pH) => {
   };
     let charge = 0;
     for (var residue = 0; residue < sequence.length; residue++) {
+//------------------------first residue----------------------------------------
       if(residue === 0) {
         if(pH <= pKaDict[sequence[residue]][1]) {
           charge++;
-          if(pKaDict[sequence[residue]][2] != ) {
-
+          if(pKaDict[sequence[residue]][2] != undefined) {
+            if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'D' || sequence[residue] === 'E') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+              if(pH <= pKaDict[sequence[residue]][2]) {
+                charge++;
+              }
+            }
+          }
+        }
+        else {
+          if(pKaDict[sequence[residue]][2] != undefined) {
+            if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'D' || sequence[residue] === 'E') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+              if(pH <= pKaDict[sequence[residue]][2]) {
+                charge++;
+              }
+            }
           }
         }
       }
+//---------------------------last residue--------------------------------------
       else if (residue === sequence.length-1) {
-
+        if(pH >= pKaDict[sequence[residue]][0]) {
+          charge--;
+          if(pKaDict[sequence[residue]][2] != undefined) {
+            if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'D' ||sequence[residue] === 'E') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+              if(pH <= pKaDict[sequence[residue]][2]) {
+                charge++;
+              }
+            }
+          }
+        }
+        else{
+          if(pKaDict[sequence[residue]][2] != undefined) {
+            if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'D' || sequence[residue] === 'E') {
+              if(pH >= pKaDict[sequence[residue]][2]) {
+                charge--;
+              }
+            }
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+              if(pH <= pKaDict[sequence[residue]][2]) {
+                charge++;
+              }
+            }
+          }
+        }
       }
+//-----------------------------all other residues------------------------------
       else {
-
+        if(pKaDict[sequence[residue]][2] != undefined) {
+          if(sequence[residue] === 'C' || sequence[residue] === 'Y') {
+            if(pH >= pKaDict[sequence[residue]][2]) {
+              charge--;
+            }
+          }
+          else if (sequence[residue] === 'D' || sequence[residue] === 'E') {
+            if(pH >= pKaDict[sequence[residue]][2]) {
+              charge--;
+            }
+          }
+          else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+            if(pH <= pKaDict[sequence[residue]][2]) {
+              charge++;
+            }
+          }
+        }
       }
     }
+    return (charge);
 }
+console.log(netCharge('NDDCYTILV',7))
