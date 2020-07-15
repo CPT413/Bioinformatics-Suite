@@ -148,5 +148,43 @@ const netCharge = (sequence, pH) => {
   This function will be used to determine the net charge of a protein at a
   specified pH value.
   */
+  const pKaDict = {
+    'G': [2.34,9.60, undefined],
+    'A': [2.34, 9.69, undefined],
+    'V': [2.32,9.62, undefined],
+    'L': [2.36, 9.60, undefined],
+    'I': [2.36, 9.60, undefined],
+    'S': [2.21, 9.15, undefined],
+    'T': [2.63, 10.43, undefined],
+    'M': [2.28, 9.21, undefined],
+    'F': [1.83, 9.13, undefined],
+    'W': [2.83, 9.39, undefined],
+    'N': [2.02, 8.80, undefined],
+    'Q': [2.17, 9.13, undefined],
+    'P': [1.99, 10.60, undefined],
+    'C': [1.71, 10.78, 8.33],
+    'H': [1.82, 9.17, 6.00],
+    'D': [2.09, 9.82, 3.86],
+    'E': [2.19, 9.67, 4.25],
+    'Y': [2.20, 9.11, 10.07],
+    'K': [2.18, 8.95, 10.79],
+    'R': [2.17, 9.04, 12.48]
+  };
+    let charge = 0;
+    for (var residue = 0; residue < sequence.length; residue++) {
+      if(residue === 0) {
+        if(pH <= pKaDict[sequence[residue]][1]) {
+          charge++;
+          if(pKaDict[sequence[residue]][2] != ) {
 
+          }
+        }
+      }
+      else if (residue === sequence.length-1) {
+
+      }
+      else {
+
+      }
+    }
 }
