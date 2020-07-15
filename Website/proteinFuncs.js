@@ -52,6 +52,8 @@ const oneToThree = sequence => {
   Converts a sequence of amino acids in single-letter abbreviation to the
   corresponding three-letter abbreviation
   */
+  //dictionary of the one-letter abbreviations and the corresponding
+  //three-letter abbreviations
   const oneLetter = {
     'A': 'Ala',
     'R': 'Arg',
@@ -75,20 +77,23 @@ const oneToThree = sequence => {
     'V': 'Val'
     }
 
-    let threeLetter = [];
+    let threeLetter = []; //create empty array to push three letter to
 
+    //loop over entire sequence
     for (var residue = 0; residue < sequence.length; residue++) {
+      //if the residue is last in the sequence, push three letter with out '-'
       if (residue === sequence.length - 1) {
         threeLetter.push(oneLetter[sequence[residue]]);
       }
+      //otherwise, push three letter followed by '-'
       else {
         threeLetter.push(oneLetter[sequence[residue]] + '-');
       }
     }
-    console.log(threeLetter.toString().replace(/,/g, ''));
+    //convert array to sting, replace ',' with '', return string
+    return (threeLetter.toString().replace(/,/g, ''));
 }
 
-oneToThree('ATGILVRNQEDWTY');
 const threeToOne = sequence => {
   /*
   Converts a sequence of amino acids in three-letter abbreviation to the
