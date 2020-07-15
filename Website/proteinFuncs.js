@@ -14,8 +14,37 @@ const molecularWeight = sequence => {
   protein (g/mol).
   */
 
+  const residueMasses = {
+    'G': 57.02,
+    'A': 71.04,
+    'S': 87.03,
+    'P': 97.05,
+    'V': 99.07,
+    'T': 101.05,
+    'C': 103.01,
+    'I': 113.08,
+    'L': 113.08,
+    'N': 114.04,
+    'D': 115.03,
+    'Q': 128.06,
+    'K': 128.09,
+    'E': 129.04,
+    'M': 131.04,
+    'H': 137.06,
+    'F': 147.07,
+    'R': 156.10,
+    'Y': 163.06,
+    'W': 186.08
+    }
+  let mass = 0;
+
+  for (var residue = 0; residue < sequence.length; residue++) {
+    mass += residueMasses[sequence[residue]];
+  }
+  console.log(mass);
 }
 
+molecularWeight('GGG')
 const oneToThree = sequence => {
   /*
   Converts a sequence of amino acids in single-letter abbreviation to the
@@ -41,7 +70,7 @@ const isoelectricPoint = sequence => {
 
 }
 
-const netCharge = (sequence, pH) => sequence{
+const netCharge = (sequence, pH) => {
   /*
   This function will be used to determine the net charge of a protein at a
   specified pH value.
