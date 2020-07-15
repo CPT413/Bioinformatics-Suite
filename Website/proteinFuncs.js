@@ -13,7 +13,7 @@ const molecularWeight = sequence => {
   abbrevation and upper case) and will return the molecular weight of the
   protein (g/mol).
   */
-
+  //dictionary or residues and their corresponding molecular weight in g/mol
   const residueMasses = {
     'G': 57.02,
     'A': 71.04,
@@ -36,15 +36,17 @@ const molecularWeight = sequence => {
     'Y': 163.06,
     'W': 186.08
     }
-  let mass = 0;
 
+  let mass = 0; //creat variable to sum up all masses of the residues
+
+  //loopo over every residue in the sequence
   for (var residue = 0; residue < sequence.length; residue++) {
+    //for each residue, add the corresponding mass to the mass sum
     mass += residueMasses[sequence[residue]];
   }
-  console.log(mass);
+  return (mass); //return value
 }
 
-molecularWeight('GGG')
 const oneToThree = sequence => {
   /*
   Converts a sequence of amino acids in single-letter abbreviation to the
