@@ -20,12 +20,24 @@ const proteinSeqCheck = sequence => {
   }
 //--------------------single letter abbreviation check-------------------------
   if(style === 1) {
-
+    for (var residue = 0; residue < sequence.length; residue++) {
+      if(singleLetterList.indexOf(sequence[residue]) === -1) {
+        throw new Error('A residue in your sequence is incorrect.');
+      }
+    }
+    return [sequence, style];
   }
-  console.log(style);
-
+//---------------------three letter abbrevation check--------------------------
+  else if(style === 3) {
+    for (var residue = 0; residue < sequence.split('-').length; residue++) {
+      if(threeLetterList.indexOf(sequence.split('-')[residue]) === -1) {
+        throw new Error('A residue in your sequence is incorrect.');
+      }
+    }
+    return [sequence, style];
+  }
 }
-proteinSeqCheck('1lc-His');
+console.log(proteinSeqCheck('Gly-Hit-Asn'));
 const molecularWeight = sequence => {
   /*
   This function will take a sequence of amino acids (single letter
