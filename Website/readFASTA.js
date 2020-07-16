@@ -4,8 +4,12 @@ const readFASTA = text => {
   The function takes the text as input and returns a
   dictionary containing the header and sequence for each entry.
   */
-  let text1 = text.split('\n')
-  return text1
+  let sequences = {};
+
+  for (let line = 0; line < text.split('\n').length; line += 2) {
+    sequences[text.split('\n')[line].slice(1)] = text.split('\n')[line + 1];
+  }
+  console.log(sequences)
 }
 
-console.log(readFASTA('>seq1\natcgcgatatagcgcta'));
+readFASTA('>seq1\natcgcgatatagcgcta\n>seq2\natcgatctattacgt');
