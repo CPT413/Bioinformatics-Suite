@@ -4,6 +4,7 @@ const proteinSeqCheck = sequence => {
   in the sequence. Will also convert the string to upper-case, which is
   standard for working with amino acids.
   */
+  //lists to comapre the residues to when checking
   const  singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L',
          'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W'];
   const threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn',
@@ -12,32 +13,42 @@ const proteinSeqCheck = sequence => {
 //------------------------determine style of input-----------------------------
   let style = 0;
 
+  //if the sequnce splits at '-' marks and matches a residue in the three
+  //letter list, the sequence is in three letter abbreviation
   if(threeLetterList.indexOf(sequence.split('-')[0]) != -1) {
-    style = 3;
+    style = 3; //set style value to 3, means three letter
   }
   else {
-    style = 1;
+    style = 1; //otherwise the style value is set to 1, means one letter
   }
 //--------------------single letter abbreviation check-------------------------
+  //checks to see the style, if 1 then check one letter
   if(style === 1) {
+    //loopes over whole sequence and checks each residue
     for (var residue = 0; residue < sequence.length; residue++) {
+      //if the residue is not in the list above
       if(singleLetterList.indexOf(sequence[residue]) === -1) {
+        //throws error and terminates code
         throw new Error('A residue in your sequence is incorrect.');
       }
     }
-    return [sequence, style];
+    return [sequence, style]; //if no errors occur, returns the sequence and style
   }
 //---------------------three letter abbrevation check--------------------------
+  //checks to see the style, if 3 then three letter
   else if(style === 3) {
+    //loops over all residues in sequence
     for (var residue = 0; residue < sequence.split('-').length; residue++) {
+      //if the residue is not in the list above
       if(threeLetterList.indexOf(sequence.split('-')[residue]) === -1) {
+        //throws error and terminates code
         throw new Error('A residue in your sequence is incorrect.');
       }
     }
-    return [sequence, style];
+    return [sequence, style]; //if no errors occur, returns the sequence and style
   }
 }
-console.log(proteinSeqCheck('Gly-Hit-Asn'));
+console.log(proteinSeqCheck('Gly-His-Asn'));
 const molecularWeight = sequence => {
   /*
   This function will take a sequence of amino acids (single letter
