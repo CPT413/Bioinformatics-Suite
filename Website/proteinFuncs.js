@@ -4,9 +4,28 @@ const proteinSeqCheck = sequence => {
   in the sequence. Will also convert the string to upper-case, which is
   standard for working with amino acids.
   */
+  const  singleLetterList = ['G', 'A', 'S', 'P', 'V', 'T', 'C', 'I', 'L',
+         'N', 'D', 'Q', 'K', 'E', 'M', 'H', 'F', 'R', 'Y', 'W'];
+  const threeLetterList = ['Cys', 'Asp', 'Ser', 'Gln', 'Lys', 'Trp', 'Asn',
+        'Pro', 'Thr', 'Phe', 'Ala', 'Gly', 'Ile', 'Leu', 'His', 'Arg', 'Met',
+        'Val', 'Glu', 'Tyr'];
+//------------------------determine style of input-----------------------------
+  let style = 0;
+
+  if(threeLetterList.indexOf(sequence.split('-')[0]) != -1) {
+    style = 3;
+  }
+  else {
+    style = 1;
+  }
+//--------------------single letter abbreviation check-------------------------
+  if(style === 1) {
+
+  }
+  console.log(style);
 
 }
-
+proteinSeqCheck('1lc-His');
 const molecularWeight = sequence => {
   /*
   This function will take a sequence of amino acids (single letter
