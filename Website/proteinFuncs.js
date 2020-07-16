@@ -206,7 +206,8 @@ const isoelectricPoint = sequence => {
   pKaList = pKaList.sort((a,b) => a-b)//sort pka list
   //finds average of pKas on either side of neutral pH, this is the agreed on
   //easy way to determine isoelectic point
-  let isoPoint = (pKaList[pKaList.indexOf(neutralpH) - 1] + pKaList[pKaList.indexOf(neutralpH) + 1])/2;
+  let isoPoint = (pKaList[pKaList.indexOf(neutralpH) - 1] +
+                 pKaList[pKaList.indexOf(neutralpH) + 1])/2;
   return (isoPoint);
 }
 
@@ -268,7 +269,8 @@ const netCharge = (sequence, pH) => {
               }
             }
             //if residue is a K, R, or H
-            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' ||
+                     sequence[residue] === 'H') {
               //if pH less than pKa, add 1
               if(pH <= pKaDict[sequence[residue]][2]) {
                 charge++;
@@ -290,7 +292,8 @@ const netCharge = (sequence, pH) => {
                 charge--;
               }
             }
-            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' ||
+                     sequence[residue] === 'H') {
               if(pH <= pKaDict[sequence[residue]][2]) {
                 charge++;
               }
@@ -317,7 +320,8 @@ const netCharge = (sequence, pH) => {
                 charge--;
               }
             }
-            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' ||
+                     sequence[residue] === 'H') {
               if(pH <= pKaDict[sequence[residue]][2]) {
                 charge++;
               }
@@ -338,7 +342,8 @@ const netCharge = (sequence, pH) => {
                 charge--;
               }
             }
-            else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+            else if (sequence[residue] === 'K' || sequence[residue] === 'R' ||
+                     sequence[residue] === 'H') {
               if(pH <= pKaDict[sequence[residue]][2]) {
                 charge++;
               }
@@ -360,7 +365,8 @@ const netCharge = (sequence, pH) => {
               charge--;
             }
           }
-          else if (sequence[residue] === 'K' || sequence[residue] === 'R' || sequence[residue] === 'H') {
+          else if (sequence[residue] === 'K' || sequence[residue] === 'R' ||
+                   sequence[residue] === 'H') {
             if(pH <= pKaDict[sequence[residue]][2]) {
               charge++;
             }
