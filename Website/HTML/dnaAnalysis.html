@@ -1,30 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DNA Analysis</title>
-    <link rel = 'icon' href = './DNA Image.png'/>
-  </head>
-  <body>
-<!---links to launch other analysis pages-->
-    <nav>
-      <a href = './dnaAnalysis.html' target = '_blank'>DNA Analysis</a>
-      <a href = './proteinAnalysis.html' target = '_blank'>Protein Analysis</a>
-    </nav>
+
+<head>
+  <title>DNA Analysis</title>
+  <link rel='icon' href='./DNA Image.png' />
+</head>
+
+<body>
+  <!---links to launch other analysis pages-->
+  <nav>
+    <a href='./dnaAnalysis.html' target='_blank'>DNA Analysis</a>
+    <a href='./proteinAnalysis.html' target='_blank'>Protein Analysis</a>
+  </nav>
+  <!--creates form to submit analusis information-->
+  <form>
     <!--html for sequence entry-->
-    <div id = sequenceEntry>
-      <h3>Enter your sequence (or FASTA formatted sequences) here:</h3>
+    <div id=sequenceEntry>
+      <h3>Sequence Entry</h3>
+      <label for="sequence-entry">Enter your sequence
+        (or FASTA formatted sequences) here:</label>
+      <textarea id='sequence-entry' name='sequence-entry' rows='5' cols='40'></textarea>
     </div>
     <!--html to select the format of sequence(s)-->
-    <div id = formatSelect>
+    <div id=formatSelect>
+      <p>What format:</p>
+      <input id='single' name='format-select' type='radio' value='single'>
+      <label for='single'>Single Sequence</label>
+      <br>
+      <input id='fasta' name='format-select' type='radio' value='fasta'>
+      <label for='fasta'>FASTA</label>
     </div>
     <!--html to select what analysis to run-->
-    <div id = analysisSelect>
+    <div id=analysisSelect>
       <h3>Analysis Options</h3>
-      <button>Analyze</button>
-    </div>
-    <!--html for analysis output window-->
-    <div id = analysisOutput>
-      <h3>Analysis Output:</h3>
-    </div>
-  </body>
+      <input type='checkbox' id = 'gcContent' name="analysis" value="gcContent">
+      <label for="gcContent">GC Content</label>
+      <input type='checkbox' id = 'reverseComp' name="analysis" value="reverseComp">
+      <label for="reverseComp">Reverse Complement</label>
+      <br>
+      <input type='checkbox' id = 'transcription' name="analysis" value="transcription">
+      <label for="transcription">Transcription</label>
+      <input type='checkbox' id = 'translation' name="analysis" value="translation">
+      <label for="translation">Translation</label>
+      <br>
+      <input type='submit' value="Analyze">
+  </form>
+  </div>
+  <!--html for analysis output window-->
+  <div id=analysisOutput>
+    <h3>Analysis Output:</h3>
+    <textarea id='output' rows='5' cols='40'></textarea>
+  </div>
+</body>
+
 </html>
