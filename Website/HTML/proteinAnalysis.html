@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Protein Analysis</title>
-  </head>
-  <body>
-<!---links to launch other analysis pages-->
-    <nav>
-      <a href = './dnaAnalysis.html' target = '_blank'>DNA Analysis</a>
-      <a href = './proteinAnalysis.html' target = '_blank'>Protein Analysis</a>
-    </nav>
+
+<head>
+  <title>Protein Analysis</title>
+</head>
+
+<body>
+  <!---links to launch other analysis pages-->
+  <nav>
+    <a href='./dnaAnalysis.html' target='_blank'>DNA Analysis</a>
+    <a href='./proteinAnalysis.html' target='_blank'>Protein Analysis</a>
+  </nav>
+  <!--create form for analysis submition-->
+  <form>
     <!--htm for sequence entry-->
-    <div id = sequenceEntry>
-      <h3>Enter your sequence (or FASTA formatted sequences) here:</h3>
+    <div id=sequenceEntry>
+      <h3>Sequence Entry</h3>
+      <label for="sequence-entry">Enter your sequence
+        (or FASTA formatted sequences) here:</label>
+        <br>
+        <textarea id="sequence-entry" name="sequence-entry" rows = "5"
+        cols="40"></textarea>
     </div>
     <!--html to select the format of sequence(s)-->
-    <div id = formatSelect>
+    <div id=formatSelect>
     </div>
     <!--html to select what analysis to run-->
-    <div id = analysisSelect>
+    <div id=analysisSelect>
       <h3>Analysis Options</h3>
       <button>Analyze</button>
     </div>
-    <!--html for analysis output window-->
-    <div id = analysisOutput>
-      <h3>Analysis Output:</h3>
-    </div>
-  </body>
+  </form>
+  <!--html for analysis output window-->
+  <div id=analysisOutput>
+    <h3>Analysis Output:</h3>
+  </div>
+</body>
+
 </html>
