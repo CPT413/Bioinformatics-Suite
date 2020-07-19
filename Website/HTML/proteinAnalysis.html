@@ -18,17 +18,37 @@
       <h3>Sequence Entry</h3>
       <label for="sequence-entry">Enter your sequence
         (or FASTA formatted sequences) here:</label>
-        <br>
-        <textarea id="sequence-entry" name="sequence-entry" rows = "5"
-        cols="40"></textarea>
+      <br>
+      <textarea id="sequence-entry" name="sequence-entry" rows="5" cols="40"></textarea>
     </div>
     <!--html to select the format of sequence(s)-->
     <div id=formatSelect>
+      <p>What format:</p>
+      <input type="radio" id="single" name="format-select" value="sinlge">
+      <label for="single">Single Sequence</label>
+      <br>
+      <input type="radio" id="fasta" name="format-select" value="fasta">
+      <label for="fasta">FASTA</label>
     </div>
     <!--html to select what analysis to run-->
     <div id=analysisSelect>
       <h3>Analysis Options</h3>
-      <button>Analyze</button>
+      <input type="checkbox" id="molecularWeight" name="analysis" value="molecularWeight">
+      <label for="molecularWeight">Molecular Weight</label>
+      <input type="checkbox" id="oneToThree" name="analysis" value="oneToThree">
+      <label for="oneToThree">One-to-Three</label>
+      <br>
+      <input type="checkbox" id="threeToOne" name="analysis" value="threeToOne">
+      <label for="threeToOnet">Three-to-One</label>
+      <input type="checkbox" id="isoelectricPoint" name="analysis" value="isoelectricPoint">
+      <label for="isoelectricPoint">Isoelectric Point</label>
+      <br>
+      <input type="checkbox" id="netCharge" name="analysis" value="netCharge">
+      <label for="netCharge">Net Charge</label>
+      <input type="number" id="pH" name="analysis" value="pH">
+      <label for="pH">pH to determine net charge</label>
+      <br>
+      <input type="submit" value="Analyze">
     </div>
   </form>
   <!--html for analysis output window-->
