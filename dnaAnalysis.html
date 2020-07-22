@@ -10,7 +10,7 @@
     <div id=sequenceEntry>
       <h3>Sequence Entry</h3>
       <label for="sequence-entry">Enter your sequence
-        (or FASTA formatted sequences) here (lowercase):</label>
+        (or FASTA formatted sequences) here (5' to 3' and lowercase):</label>
         <br>
       <textarea id='sequence-entry' name='sequence-entry' rows='5' cols='40'></textarea>
     </div>
@@ -281,7 +281,7 @@
             outputInfo.push('GC Content: ' + gcContent(sequence));
           }
           else if (analysisOptions[i].value === 'reverseComp') {
-            outputInfo.push('Reverse Complement: ' + reverseComp(sequence));
+            outputInfo.push('Reverse Complement (3' to 5'): ' + reverseComp(sequence));
           }
           else if (analysisOptions[i].value === 'transcription') {
             outputInfo.push('Transcription: ' + transcription(sequence));
@@ -319,7 +319,7 @@
               outputInfo.push('GC Content: ' + gcContent(sequence));
             }
             else if (analysisOptions[i].value === 'reverseComp') {
-              outputInfo.push('Reverse Complement: ' + reverseComp(sequence));
+              outputInfo.push('Reverse Complement (3' to 5'): ' + reverseComp(sequence));
             }
             else if (analysisOptions[i].value === 'transcription') {
               outputInfo.push('Transcription: ' + transcription(sequence));
