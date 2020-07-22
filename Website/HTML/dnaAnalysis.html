@@ -309,11 +309,16 @@
 
   //FASTA format
     else {
+      //reads the fasta formatted input into an object called sequences
       let sequences = readFASTA(input);
 
+      //loops over every entry in the object
       for (let entry in sequences) {
+        //checks to make sure each sequence is properly formatted
         sequence = dnaSeqCheck(sequences[entry]);
+        //pushes header to output array
         outputInfo.push(entry);
+        //loops over all check box options
         for(let i = 0; i < analysisOptions.length; i++) {
           //if option is selected
           if (analysisOptions[i].checked) {
@@ -333,9 +338,12 @@
 
           }
         }
+        //adds an extra character between each entry
         outputInfo.push('');
 
       }
+      //changes output array to string and replaces commas with line breaks
+      outputInfo = outputInfo.toString().replace(/,/g, '\n')
       document.getElementById("output").innerHTML = outputInfo;
     }
 
