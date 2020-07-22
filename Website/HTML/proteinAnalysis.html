@@ -520,46 +520,68 @@
     }
     //single sequence
     if(inputFormat === 'single') {
+      //check the format and style of the sequence input
       sequence= proteinSeqCheck(input)[0];
       style = proteinSeqCheck(input)[1]
-  document.getElementById("output").innerHTML = analysisOptions;
-      //for(let i = 0; i < analysisOptions.length; i++) {
-      /*
-        if(analysisOptions[i] === 'molecularWeight') {
-          if(style === 1){
-            document.getElementById("output").innerHTML = 'here';
-            //outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(sequence));
+
+      //loop over all check boxes
+      for(let i = 0; i < analysisOptions.length; i++) {
+        //if the box is checked
+        if(analysisOptions[i].checked){
+          //perform the correspondind analysis
+          if(analysisOptions[i].value === 'molecularWeight') {
+            if(style === 1){
+              outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(sequence));
+            }
+            else{
+              tempSequence = threeToOne(sequence);
+              outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(tempSequence));
+            }
           }
-          else{
-            sequence = threeToOne(sequence);
-            //outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(sequence));
+          else if (analysisOptions[i].value === 'oneToThree') {
+            if(style === 1) {
+              outputInfo.push('One-to-Three: ' + oneToThree(sequence));
+            }
+          }
+          else if (analysisOptions[i].value === 'threeToOne') {
+            if(style === 3) {
+              outputInfo.push('Three-to-One: ' + threeToOne(sequence));
+            }
+          }
+          else if (analysisOptions[i].value === 'isoelectricPoint') {
+            if(style === 1) {
+              outputInfo.push('Isoelectric Point: ' + isoelectricPoint(sequence));
+            }
+            else{
+              tempSequence = threeToOne(sequence);
+              outputInfo.push('Isoelectric Point: ' + isoelectricPoint(tempSequence));
+            }
+          }
+          else {
+            pH = document.getElementById('pH').value;
+            if(style === 1) {
+              outputInfo.push('Netcharge at pH ' + pH + ': ' + netCharge(sequence,pH));
+            }
+            else{
+              tempSequence = threeToOne(tempSequence);
+              outputInfo.push('Netcharge at pH ' + pH + ': ' + netCharge(tempSequence,pH));
+            }
+
           }
         }
-        else if (true) {
-
-        }
-        else if (true) {
-
-        }
-        else if (true) {
-
-        }
-        else {
-
-        }
-        */
       }
+      //change array to string and replace commas with line breaks
+      outputInfo = outputInfo.toString().replace(/,/g, '\n')
+      document.getElementById("output").innerHTML = outputInfo;
 
-
-      //document.getElementById("output").innerHTML = outputInfo;
+      //document.getElementById("output").innerHTML = input;
     }
-
-    //fasta format
     else{
 
     }
-    //document.getElementById("output").innerHTML = input;
   }
+
+
 
   </script>
 </body>
