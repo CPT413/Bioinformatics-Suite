@@ -260,14 +260,15 @@
   const dnaOutput = () => {
     event.preventDefault();
     //gets sequence from input textarea
-    let sequence = document.getElementById('sequence-entry').value;
-
+    let input = document.getElementById('sequence-entry').value;
+    //creates empty array to push output info to
     let outputInfo = [];
-
+    //gets value of anaysis check boxes
     let analysisOptions = document.getElementsByName('analysis');
-
+    //gets value of analysis radio buttons
     let inputFormat = document.getElementsByName('format-select');
 
+    //loops over radio button options and returns which is selects
     for(let i = 0; i < inputFormat.length; i++) {
       if(inputFormat[i].checked) {
         inputFormat = inputFormat[i].value;
@@ -277,26 +278,30 @@
 
     //sinlge sequence input
     if(inputFormat === 'single') {
-      sequence = dnaSeqCheck(sequence);
-
+      //checks to make sure sequence is properly formatted
+      sequence = dnaSeqCheck(input);
+      //loops over all check box options
       for(let i = 0; i < analysisOptions.length; i++) {
+        //if option is selected
         if (analysisOptions[i].checked) {
-          if (analysis[i].value === 'gcContent') {
-            outputInfo.push('gc');
+          //performs the corresponding analysis and pushes result to output array
+          if (analysisOptions[i].value === 'gcContent') {
+            outputInfo.push('GC Content: ' + gcContent(sequence));
           }
-          /*
-          else if (analysis[i].value === 'reverseComp') {
-            outputInfo.push('revComp');
+          else if (analysisOptions[i].value === 'reverseComp') {
+            outputInfo.push('Reverse Complement: ' + reverseComp(sequence));
           }
-          else if (analysis[i].value === 'transcription') {
-            outputInfo.push('transcript');
+          else if (analysisOptions[i].value === 'transcription') {
+            outputInfo.push('Transcription: ' + transcription(sequence));
           }
           else {
-            outputInfo.push('translate');
+            outputInfo.push('Translation: ' + translation(sequence));
           }
-          */
+
         }
       }
+      //changes output array to string and replaces commas with line breaks
+      outputInfo = outputInfo.toString().replace(/,/g, '\n')
 
 
       document.getElementById("output").innerHTML = outputInfo;
@@ -304,6 +309,7 @@
 
   //FASTA format
     else {
+      let sequences = readFASTA
       document.getElementById("output").innerHTML = 'here: fasta';
     }
 
