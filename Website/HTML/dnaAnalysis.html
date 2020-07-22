@@ -44,7 +44,8 @@
       <input type='checkbox' id = 'translation' name="analysis" value="translation">
       <label for="translation">Translation</label>
       <br>
-      <input type='submit' value="Analyze">
+      <!--<input type='submit' value="Analyze" onsubmit="testOutput()">-->
+      <button onclick="testOutput()">Analyze</button>
   </form>
   </div>
   <!--html for analysis output window-->
@@ -52,6 +53,11 @@
     <h3>Analysis Output:</h3>
     <textarea id='output' rows='5' cols='40'></textarea>
   </div>
+  <script>
+    function testOutput() {
+      document.getElementById("output").value = "test";
+    }
+  </script>
 </body>
 
 </html>
