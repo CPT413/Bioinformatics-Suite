@@ -24,7 +24,7 @@
     <!--html to select the format of sequence(s)-->
     <div id=formatSelect>
       <p>What format:</p>
-      <input type="radio" id="single" name="format-select" value="sinlge">
+      <input type="radio" id="single" name="format-select" value="single">
       <label for="single">Single Sequence</label>
       <br>
       <input type="radio" id="fasta" name="format-select" value="fasta">
@@ -45,10 +45,10 @@
       <br>
       <input type="checkbox" id="netCharge" name="analysis" value="netCharge">
       <label for="netCharge">Net Charge</label>
-      <input type="number" id="pH" name="analysis" value="pH">
+      <input type="number" id="pH" name="analysisNum" value="pH">
       <label for="pH">pH to determine net charge</label>
       <br>
-      <button onclick='proteinOutput()'>Analyze</button>
+      <button onclick="proteinOutput()">Analyze</button>
     </div>
   </form>
   <!--html for analysis output window-->
@@ -75,6 +75,7 @@
       sequences[text.split('\n')[line].slice(1)] = text.split('\n')[line + 1];
     }
     return sequences; //return the object
+  }
 
   const proteinSeqCheck = sequence => {
     /*
@@ -501,7 +502,65 @@
 
   const proteinOutput = () => {
     event.preventDefault();
+    let input = document.getElementById('sequence-entry').value;
+
+    //creates empty array to push output info to
+    let outputInfo = [];
+    //gets value of anaysis check boxes
+    let analysisOptions = document.getElementsByName('analysis');
+    //gets value of analysis radio buttons
+    let inputFormat = document.getElementsByName('format-select');
+
+    //loops over radio button options and returns which is selects
+    for(let i = 0; i < inputFormat.length; i++) {
+      if(inputFormat[i].checked) {
+        inputFormat = inputFormat[i].value;
+        break
+      }
+    }
+    //single sequence
+    if(inputFormat === 'single') {
+      sequence= proteinSeqCheck(input)[0];
+      style = proteinSeqCheck(input)[1]
+  document.getElementById("output").innerHTML = analysisOptions;
+      //for(let i = 0; i < analysisOptions.length; i++) {
+      /*
+        if(analysisOptions[i] === 'molecularWeight') {
+          if(style === 1){
+            document.getElementById("output").innerHTML = 'here';
+            //outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(sequence));
+          }
+          else{
+            sequence = threeToOne(sequence);
+            //outputInfo.push('Molecular weight (g/mol): ' + molecularWeight(sequence));
+          }
+        }
+        else if (true) {
+
+        }
+        else if (true) {
+
+        }
+        else if (true) {
+
+        }
+        else {
+
+        }
+        */
+      }
+
+
+      //document.getElementById("output").innerHTML = outputInfo;
+    }
+
+    //fasta format
+    else{
+
+    }
+    //document.getElementById("output").innerHTML = input;
   }
+
   </script>
 </body>
 
